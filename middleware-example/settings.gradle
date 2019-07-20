@@ -1,0 +1,3 @@
+rootProject.name = 'middleware-example'
+include 'zookeeper-example'
+
