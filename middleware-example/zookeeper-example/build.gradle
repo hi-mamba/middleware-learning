@@ -1,6 +1,9 @@
 
 dependencies {
+
     compile group: 'org.apache.zookeeper', name: 'zookeeper', version: '3.5.5'
+    //  Curator的确是足够牛逼，不仅封装了Zookeeper的常用API，也包装了很多常用Case的实现
+    compile group: 'org.apache.curator', name: 'curator-recipes', version: '4.2.0'
 
     compile("junit:junit:4.12")
 }
