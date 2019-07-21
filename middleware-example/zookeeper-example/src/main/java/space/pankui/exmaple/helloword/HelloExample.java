@@ -1,8 +1,10 @@
 package space.pankui.exmaple.helloword;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.zookeeper.KeeperException;
-import space.pankui.exmaple.util.ZkClientUtil;
+import org.apache.zookeeper.ZooKeeper;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -12,10 +14,18 @@ import java.util.List;
  *
  * </pre>
  */
+@Slf4j
 public class HelloExample {
 
-    public static void main(String[] args) throws KeeperException, InterruptedException {
-        List<String> list = ZkClientUtil.getInstance().getChildren("/");
-        System.out.println(list);
+
+    public static void main(String[] args) throws KeeperException, InterruptedException, IOException {
+        // 该构造方法尝试连接到ZooKeeper服务器并返回一个引用
+        ZooKeeper zookeeper = new ZooKeeper("172.23.3.19:2181", 2000, null);
+
+        // ZooKeeper类的getChildren(String path，boolean watch)方法返回给定路径上znode的子级列表
+        List<String> children = zookeeper.getChildren("/", null);
+        for (String child : children) {
+            log.info("##### child:{}", child);
+        }
     }
 }

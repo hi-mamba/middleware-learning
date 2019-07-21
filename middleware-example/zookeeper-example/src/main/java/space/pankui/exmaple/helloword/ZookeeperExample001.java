@@ -1,6 +1,7 @@
 package space.pankui.exmaple.helloword;
 
 import org.apache.zookeeper.*;
+import space.pankui.exmaple.util.ZkClientUtil;
 
 import java.io.IOException;
 
@@ -16,12 +17,7 @@ public class ZookeeperExample001 {
     public static void main(String[] args) throws IOException, KeeperException, InterruptedException {
 
         // 创建一个与服务器的连接
-        ZooKeeper zk = new ZooKeeper("172.23.3.19:2181", 60000, new Watcher() {
-            // 监控所有被触发的事件
-            public void process(WatchedEvent event) {
-                System.out.println("EVENT:" + event.getType());
-            }
-        });
+        ZooKeeper zk = ZkClientUtil.getInstance().getZookeeper();
 
         // 查看根节点
         System.out.println("ls / => " + zk.getChildren("/", true));

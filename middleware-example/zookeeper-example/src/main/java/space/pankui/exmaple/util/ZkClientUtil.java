@@ -21,7 +21,7 @@ public class ZkClientUtil {
 
     private ZooKeeper zookeeper;
 
-    private final String ZOOKEEPER_ADDRESS = "172.23.3.19:2181";
+    public static final String ZOOKEEPER_ADDRESS = "172.23.3.19:2181,172.23.3.19:2182,172.23.3.19:2183";
 
     private static ZkClientUtil zkClientUtil = new ZkClientUtil();
 
@@ -36,11 +36,8 @@ public class ZkClientUtil {
     /**
      * 创建 Watcher 实例
      */
-    private Watcher watcher = new Watcher() {
-        @Override
-        public void process(WatchedEvent event) {
-            log.info("WatchedEvent >>> " + event.toString());
-        }
+    private Watcher watcher = (WatchedEvent event) -> {
+        log.info("WatchedEvent >>> " + event.toString());
     };
 
     /**
