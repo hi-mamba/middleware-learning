@@ -1,3 +1,5 @@
 rootProject.name = 'middleware-example'
 include 'zookeeper-example'
+include 'rocket-mq-example'
+include 'kafka-exmaple'
 
