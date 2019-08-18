@@ -39,13 +39,33 @@ $ sh bin/kafka-console-producer.sh --broker-list localhost:9092 --topic kafkatop
 > 新版本 消费 --zookeeper 换成 --bootstrap-server
 ```bash
 
-$ sh bin/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic kafkatopic --from-beginning
+$ sh bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic kafkatopic --from-beginning
 
 ```
 - 删除Topic
 ```bash
 $ sh bin/kafka-run-class.sh kafka.admin.TopicCommand --delete --topic kafkatopic --zookeeper localhost:2181
 
+```
+- 彻底删除Topic
+[如何彻底删除Kafka中的topic (marked for deletion)](https://blog.csdn.net/russle/article/details/82881297)
+
+```bash
+[root@localhost zookeeper]# sh zookeeper-3.5.5-server1/bin/zkCli.sh
+[zk: localhost:2181(CONNECTED) 1] ls /brokers/topics
+[__consumer_offsets, gaozi, kafkatopic, kafkatopic_test_test, test1, topic_cluster_test, topic_new_test_1]
+[zk: localhost:2181(CONNECTED) 11] deleteall /brokers/topics/test1
+[zk: localhost:2181(CONNECTED) 12] ls /brokers/topics
+[__consumer_offsets, kafkatopic, kafkatopic_test_test, topic_cluster_test, topic_new_test_1]
+```
+再次查看topic
+```bash
+[root@localhost broker1]# sh bin/kafka-topics.sh --list --zookeeper localhost:2181,localhost:2182
+__consumer_offsets
+kafkatopic
+kafkatopic_test_test
+topic_cluster_test
+topic_new_test_1
 ```
 
 - 查看Topic 的offset
@@ -56,6 +76,34 @@ $ sh bin/kafka-run-class.sh kafka.admin.TopicCommand --delete --topic kafkatopic
 $ sh bin/kafka-consumer-offset-checker  --zookeeper localhost:2181 --topic kafkatopic --group consumer
 
 ```
-Kafka 的数据在Zookeeper 节点的 /var/local/kafka/data 目录中，以topic 作为子目录名。
 
- 
+
+## 遇到问题
+
+[Kafka 消息无法接收(group coordinator is not available)](https://blog.csdn.net/lg772ef/article/details/86632122)
+
+- 解决方案
+
+连接 zookeeper 删除 Kafka配置
+```bash
+[root@localhost zookeeper]# ./zookeeper-3.5.5-server1/bin/zkCli.sh
+Connecting to localhost:2181
+[zk: localhost:2181(CONNECTED) 3] ls /brokers/topics
+[__consumer_offsets, kafkatopic, topic_cluster_test, topic_new_test_1]
+[zk: localhost:2181(CONNECTED) 4] deleteall /brokers/topics/topic_cluster_test
+[zk: localhost:2181(CONNECTED) 5] deleteall /brokers/topics/topic_new_test_1
+[zk: localhost:2181(CONNECTED) 6] deleteall /brokers/topics/__consumer_offsets
+[zk: localhost:2181(CONNECTED) 7] ls /brokers/topics
+```
+
+删除Kafka日志
+> Kafka的日志配置在你安装Kafka目录下的config/server.properties 这个文件里，找到 log.dirs,删除这个配置文件夹里所有文件
+
+比如我的配置是这个
+>log.dirs=/tmp/kafka-logs/broker2
+
+然后我执行删除
+> rm -rf /tmp/kafka-logs/broker2/*   
+
+就可以了
+
