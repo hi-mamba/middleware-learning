@@ -80,7 +80,25 @@ $ sh bin/kafka-consumer-offset-checker  --zookeeper localhost:2181 --topic kafka
 
 ## 遇到问题
 
+```bash
+Sending FindCoordinator request to broker 172.23.3.19:9092 (id: 1 rack: null)
+15:25:33.524 [main] DEBUG org.apache.kafka.clients.consumer.internals.AbstractCoordinator - [Consumer clientId=consumer-1, groupId=kobe] Received FindCoordinator response ClientResponse(receivedTimeMs=1566113133523, latencyMs=2, disconnected=false, requestHeader=RequestHeader(apiKey=FIND_COORDINATOR, apiVersion=2, clientId=consumer-1, correlationId=477), responseBody=FindCoordinatorResponseData(throttleTimeMs=0, errorCode=15, errorMessage='The coordinator is not available.', nodeId=-1, host='', port=-1))
+15:25:33.524 [main] DEBUG org.apache.kafka.clients.consumer.internals.AbstractCoordinator - [Consumer clientId=consumer-1, groupId=kobe] Group coordinator lookup failed: The coordinator is not available.
+15:25:33.524 [main] DEBUG org.apache.kafka.clients.consumer.internals.AbstractCoordinator - [Consumer clientId=consumer-1, groupId=kobe] Coordinator discovery failed, refreshing metadata
+15:25:33.622 [main] DEBUG org.apache.kafka.clients.NetworkClient - [Consumer clientId=consumer-1, groupId=kobe] Sending metadata request MetadataRequestData(topics=[MetadataRequestTopic(name='kafkatopic')], allowAutoTopicCreation=true, includeClusterAuthorizedOperations=false, includeTopicAuthorizedOperations=false) to node 172.23.3.19:9092 (id: 1 rack: null)
+15:25:33.625 [main] DEBUG org.apache.kafka.clients.Metadata - [Consumer clientId=consumer-1, groupId=kobe] Updating last seen epoch from 0 to 0 for partition kafkatopic-0
+```
+抓住主要异常内容
+> responseBody=FindCoordinatorResponseData(throttleTimeMs=0, errorCode=15, errorMessage='The coordinator is not available.', nodeId=-1, host='', port
+
 [Kafka 消息无法接收(group coordinator is not available)](https://blog.csdn.net/lg772ef/article/details/86632122)
+
+最终把应用所使用的group修改掉了
+
+下面列出的idea是找到的一些其他思路   
+清理所有的offset_topics or 重建所有资源的topic or 修改资源所使用的group
+
+[The group coordinator is not available-Kafka](https://stackoverflow.com/questions/40316862/the-group-coordinator-is-not-available-kafka/40318602#40318602)
 
 - 解决方案
 

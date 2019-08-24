@@ -23,7 +23,7 @@ public class ConsumerClientExample {
         //kafka broker列表
         props.put("bootstrap.servers", "172.23.3.19:9092,172.23.3.19:9093");
         //consumer group id
-        props.put("group.id", "yongliang");
+        props.put("group.id", "kobe");
         //手动提交offset
         props.put("enable.auto.commit", "false");
         //earliest表示从最早的偏移量开始拉取，latest表示从最新的偏移量开始拉取，none表示如果没有发现该Consumer组之前拉取的偏移量则抛异常。默认值latest。
