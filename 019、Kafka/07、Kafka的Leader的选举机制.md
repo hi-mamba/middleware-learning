@@ -32,8 +32,28 @@ Kafka会在Zookeeper上针对每个Topic维护一个称为ISR（in-sync replica�
 
 如果某个分区的Leader不可用，Kafka就会从ISR集合中选择一个副本作为新的Leader。 
 
-显然通过ISR，kafka需要的冗余度较低，可以容忍的失败数比较高。假设某个topic有f+1个副本，kafka可以容忍f个服务器不可用。 
+显然通过ISR，kafka需要的冗余度较低，可以容忍的失败数比较高。
+假设某个topic有f+1个副本，kafka可以容忍f个服务器不可用。 
 
+### kafka如何选用leader呢 ?
+> broker的offset大致分为三种：base offset、high watemark（HW）、log end offset（LEO）
+
+选举leader常用的方法是多数选举法，比如Redis等，但是kafka没有选用多数选举法，kafka采用的是quorum（法定人数）。
+
+[quorum](https://github.com/hi-mamba/distributed-learning/blob/master/%E5%88%86%E5%B8%83%E5%BC%8F/%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95/03%E3%80%81%E5%9F%BA%E4%BA%8E%20Quorum%20%E6%8A%95%E7%A5%A8%E6%9C%BA%E5%88%B6%E7%9A%84%20Replica%20Control%20%E7%AE%97%E6%B3%95.md)
+是一种在分布式系统中常用的算法，主要用来通过数据冗余来保证数据一致性的投票算法。
+在kafka中该算法的实现就是ISR，在ISR中就是可以被选举为leader的法定人数。
+
+- 在leader宕机后，只能从ISR列表中选取新的leader，无论ISR中哪个副本被选为新的leader，
+它都知道HW之前的数据，可以保证在切换了leader后，消费者可以继续看到HW之前已经提交的数据。
+
+- HW的截断机制：选出了新的leader，而新的leader并不能保证已经完全同步了之前leader的所有数据，
+只能保证HW之前的数据是同步过的，此时所有的follower都要将数据截断到HW的位置，再和新的leader同步数据，来保证数据一致。
+当宕机的leader恢复，发现新的leader中的数据和自己持有的数据不一致，此时宕机的leader会将自己的数据截断到宕机之前的hw位置，
+然后同步新leader的数据。宕机的leader活过来也像follower一样同步数据，来保证数据的一致性。
+
+ 
+ 
 ### 为什么不用少数服从多数的方法 
 
 少数服从多数是一种比较常见的一致性算法和Leader选举法。它的含义是只有超过半数的副本同步了，系统才会认为数据已同步；
