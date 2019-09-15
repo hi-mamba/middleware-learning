@@ -91,5 +91,5 @@
     compile group: 'org.apache.curator', name: 'curator-recipes', version: '4.2.0'
 ```
 
-## [自己实现 ZooKeeper 分布式锁 例子](/middleware-example/zookeeper-example/src/main/java/space/pankui/exmaple/lock/ZookDistributedLockExample.java)
+## [自己实现 ZooKeeper 分布式锁 例子](/space/pankui/exmaple/lock/ZookDistributedLockExample.java)
 

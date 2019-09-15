@@ -2,6 +2,8 @@
 
 # zookeeper监控指标
 
+异常解决方案[stat is not executed because it is not in the whitelist.](11、zookeeper常用四字命令-异常解决方案.md)
+
 目前zookeeper获取监控指标已知的有两种方式
 
 1. 通过zookeeper自带的four letter words command获取各种各样的监控指标

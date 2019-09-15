@@ -38,4 +38,9 @@ ZooKeeper从其数据模型的角度提供了一系列的保证，并在其基�
 - Reliability：这确保了这些更新一旦被应用就会一直存在。直到被客户端重写。
 - Timeliness：客户端的系统视图保证在一定的时间内是最新的。这被称为最终一致性。
 
+
+## 实践例子
+
+[ZooKeeper Watcher监视使客户端能够接收来自ZooKeeper服务器的通知，并在发生时处理这些事件](/middleware-example/zookeeper-example/src/main/java/space/pankui/exmaple/watcher/WatcherExample.java)
+
  

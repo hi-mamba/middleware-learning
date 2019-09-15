@@ -18,13 +18,16 @@ buildscript {
 
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        // 解决 src/test 下 lombok不起作用的问题
+        classpath "io.freefair.gradle:lombok-plugin:4.1.0"
     }
 }
 // 所有模块/项目的通用配置
 allprojects {
 
     apply plugin: 'idea'
-
+    apply plugin: 'java'
+    apply plugin: "io.freefair.lombok"
     group 'space.pankui'
     version '1.0-SNAPSHOT'
 
@@ -33,7 +36,7 @@ allprojects {
 
 // 子模块/项目的统一配置
 subprojects {
-
+    apply plugin: 'idea'
     apply plugin: 'java'
     apply plugin: "org.springframework.boot"
 
@@ -67,7 +70,8 @@ subprojects {
         testCompile("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
         compile("junit:junit:4.12")
 
-        compile group: 'org.projectlombok', name: 'lombok', version: '1.18.8'
+        compileOnly 'org.projectlombok:lombok:1.18.10'
+        testCompileOnly 'org.projectlombok:lombok:1.18.10'
         compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.26'
 
 

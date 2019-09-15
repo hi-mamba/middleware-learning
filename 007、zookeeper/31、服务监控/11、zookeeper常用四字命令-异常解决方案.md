@@ -7,12 +7,12 @@
 
 - [原文](https://blog.csdn.net/x763795151/article/details/80599498)
 
-１. 问题描述   
+## １. 问题描述   
 本来是想用wchc查看监听路径信息的，结果使用这个指令查询的时候，zookeeper服务器返回的响应信息是：
 
-wchc is not executed because it is not in the whitelist.
+> wchc is not executed because it is not in the whitelist.
 
-２. 分析原因   
+## ２. 分析原因   
 查了下日志，找到了这条信息是从这个类org.apache.zookeeper.server.NettyServerCnxn里返回的，
 然后直接上github找到源码在这个类里，找到这条信息出现的方法体内，如下：
 ```java
@@ -137,6 +137,8 @@ wchc is not executed because it is not in the whitelist.
         cmd2String.put(telnetCloseCmd, "telnet close");
     }
 ```
+## 解决方案
+
 重点看我上面代码的中文说明，便明白，可以在启动脚本里添加ＶＭ环境变量-Dzookeeper.4lw.commands.whitelist=*，
 便可以把所有指令添加到白名单，我是添加在脚本的这个位置：
 ```
