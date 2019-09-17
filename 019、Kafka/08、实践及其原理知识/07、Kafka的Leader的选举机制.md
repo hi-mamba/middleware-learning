@@ -18,7 +18,7 @@ ISR的成员是动态的，如果一个节点被淘汰了，当它重新达到�
   但是，为了保证较高的处理效率，消息的读写都是在固定的一个副本上完成。这个副本就是所谓的Leader，
 而其他副本则是Follower。而Follower则会定期地到Leader上同步数据。
 
-![](../images/kafka/log_anatomy.png)
+![](../../images/kafka/log_anatomy.png)
 
 ## Leader选举
 
