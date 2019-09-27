@@ -46,6 +46,10 @@ subprojects {
     // java编译的时候缺省状态下会因为中文字符而失败
     [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
 
+    // 添加这里解决子模块项目依赖导致编译无法通过
+    bootJar { enabled = false }
+    jar {enabled = true}
+
     repositories {
         mavenLocal()
         maven {
@@ -70,14 +74,16 @@ subprojects {
         testCompile("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
         compile("junit:junit:4.12")
 
+        //https://projectlombok.org/setup/gradle  且不用使用 Lombok 插件
         compileOnly 'org.projectlombok:lombok:1.18.10'
         testCompileOnly 'org.projectlombok:lombok:1.18.10'
+        annotationProcessor 'org.projectlombok:lombok:1.18.10'
         compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.26'
 
 
     }
     configurations {
         //移除
-
+        all*.exclude group: 'com.google.guava'
     }
 }
