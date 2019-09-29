@@ -39,7 +39,7 @@ public class InitListener implements ServletContextListener {
             //获得端口
             int port = Integer.parseInt(serverPort);
             log.info("### 服务注册 hostAddress={},port={}", hostAddress, port);
-            serviceRegistry.register(hostAddress, port);
+           // serviceRegistry.register(hostAddress, port);
         } catch (Exception e) {
             e.printStackTrace();
         }

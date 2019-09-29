@@ -47,7 +47,8 @@ subprojects {
     [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
 
     // 添加这里解决子模块项目依赖导致编译无法通过
-    bootJar { enabled = false }
+    // 注意这里的配置，如果是FALSE 那么无法打可执行的JAR
+    bootJar { enabled = true }
     jar {enabled = true}
 
     repositories {

@@ -11,11 +11,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * </pre>
  */
 @SpringBootApplication
-public class ZkApplication {
+public class RocketMQApplication {
 
     public static void main(String[] args) {
         try {
-            SpringApplication.run(ZkApplication.class, args);
+            SpringApplication.run(RocketMQApplication.class, args);
         } catch (Exception e) {
             e.printStackTrace();
         }
