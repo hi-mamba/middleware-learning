@@ -5,7 +5,7 @@ ZOOKEEPER_PATH="/home/mamba/soft/zookeeper"
 cluster_num=$1
 
 if [ ! "${cluster_num}" ]; then
-  echo "输入安装伪集群的数量不能为 null，且不能小于2,举个例子：sh test.sh 3"
+  echo "输入安装伪集群的数量不能为 null，且不能小于3个,举个例子：sh test.sh 3"
   exit 1
 fi
 

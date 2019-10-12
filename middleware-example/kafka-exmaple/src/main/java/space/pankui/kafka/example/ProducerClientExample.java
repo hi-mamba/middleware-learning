@@ -23,7 +23,7 @@ public class ProducerClientExample {
     public static void main(String[] args) {
         Properties properties = new Properties();
         // kafka broker 列表
-        properties.put("bootstrap.servers", "172.23.3.19:9092,172.23.3.19:9093");
+        properties.put("bootstrap.servers", "172.23.3.21:9092,172.23.3.21:9093");
         //acks=1表示Broker接收到消息成功写入本地log文件后向Producer返回成功接收的信号，不需要等待所有的Follower全部同步完消息后再做回应
         properties.put("acks", "1");
         //key和value的字符串序列化类

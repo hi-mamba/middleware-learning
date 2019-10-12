@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 # 启动之前判断 kafka 是否存在，存在kill
@@ -14,15 +13,15 @@ if [[ "" !=  "$PID" ]]; then
   kill -9 $PID
 fi
 
-kafka_location="/usr/soft/kafka/cluster"
+kafka_location="/home/mamba/soft/kafka/cluster"
 broker_1_location="${kafka_location}/broker1"
 broker_2_location="${kafka_location}/broker2"
 
 echo "###### 开始启动kafka 集群服务 ######  注意Kafka 在你机器的目录!!!! " # kafka 集群启动脚本
 
-"$broker_1_location"/bin/kafka-server-start.sh "$broker_1_location"/config/server.properties &
+"$broker_1_location"/bin/kafka-server-start.sh ${broker_1_location}/config/server.properties &
 sleep 1;
-"$broker_2_location"/bin/kafka-server-start.sh "$broker_2_location"/config/server.properties &
+"$broker_2_location"/bin/kafka-server-start.sh ${broker_2_location}/config/server.properties &
 sleep 1;
 
 

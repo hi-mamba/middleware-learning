@@ -25,7 +25,7 @@ public class ZkClientUtil {
      *   但是也有一种极罕见的情况，比如这行代码执行时，刚初始化完成，正准备连接ip1时，因为网络故障ip1对应的server挂了，仍然会报错（此时，zk还来不及选出新leader），
      *   这个问题详见：http://segmentfault.com/q/1010000002506725/a-1020000002507402，参考该文的做法
      * */
-    public static final String ZOOKEEPER_ADDRESS = "172.23.3.19:2181,172.23.3.19:2182,172.23.3.19:2183";
+    public static final String ZOOKEEPER_ADDRESS = "172.23.3.21:2181,172.23.3.21:2182,172.23.3.21:2183";
 
     private static ZkClientUtil zkClientUtil = new ZkClientUtil();
 

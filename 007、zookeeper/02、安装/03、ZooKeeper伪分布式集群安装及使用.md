@@ -199,8 +199,15 @@ server.3=192.168.1.201:2890:3890
 ```
 3个节点的ZooKeeper集群配置完成，接下来我们的启动服务。
 
-启动集群
+### 启动集群
 
+> 启动集群注意防火墙把 端口加入到防火墙里，或者关闭防火墙，否则远程访问不了  
+
+[防火墙未开端口导致zookeeper集群异常，kafka起不来](https://blog.51cto.com/10950710/2129883)
+
+> firewall-cmd --list-ports 3888/tcp 2181/tcp 2888/tcp  9092/tcp 
+
+为保证万一，把整个zk集群全部按照顺序重启了一遍
 
 ```bash
 ~ /home/conan/toolkit/zookeeper345/bin/zkServer.sh start zk1.cfg
@@ -556,4 +563,4 @@ xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLS
 基础讲完，接下来就让我动手管理起，我们自己的分布式系统吧。
 
 
-- [zookeeper 集群启动脚本](../zookeeper_cluster_start.sh)
+- [zookeeper 集群启动脚本](05、zookeeper_cluster_start.sh)
