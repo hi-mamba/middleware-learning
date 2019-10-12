@@ -2,8 +2,13 @@
 
 # 启动之前判断zookeeper 是否存在，存在kill
 
+# Error processing conf/zk1.cfg  是因为你的 zk1.cfg 的 dataDir 配置错误,配置需要在ZK安装目录
 
 echo "******* 启动之前判断 zookeeper 是否存在，存在kill  ****** "
+
+ZOOKEEPER_PATH="/home/mamba/soft/zookeeper"
+
+ZOOKEEPER_CLUSER_PREFIX_NAME="zk"
 
 # ps -ef | grep your_process_name | grep -v grep | grep -v zookeeper_cluster_start.sh | awk '{print $2}' | xargs kill
 
@@ -13,14 +18,15 @@ if [[ "" !=  "$PID" ]]; then
   kill -9 $PID
 fi
 
+# todo 读取 cluster目前下有多少 zk 开头的文件夹【自己定义】
 
 echo "###### 开始启动zookeeper 集群服务 ######" # zookeeper 集群启动脚本
 
-/usr/local/soft/zookeeper/cluster/zookeeper_2/bin/zkServer.sh start zk2.cfg
+${ZOOKEEPER_PATH}/cluster/${ZOOKEEPER_CLUSER_PREFIX_NAME}2/bin/zkServer.sh start zk2.cfg
 
-/usr/local/soft/zookeeper/cluster/zookeeper_1/bin/zkServer.sh start zk1.cfg
+${ZOOKEEPER_PATH}/cluster/${ZOOKEEPER_CLUSER_PREFIX_NAME}1/bin/zkServer.sh start zk1.cfg
 
-/usr/local/soft/zookeeper/cluster/zookeeper_3/bin/zkServer.sh start zk3.cfg
+${ZOOKEEPER_PATH}/cluster/${ZOOKEEPER_CLUSER_PREFIX_NAME}3/bin/zkServer.sh start zk3.cfg
 
 
 PID_COUNT=`ps -eaf | grep zookeeper | grep -v grep | grep -v zookeeper_cluster_start.sh | wc -l`
@@ -43,8 +49,8 @@ done
 
 echo " ====  启动完成。。。开始检查节点状态 === "
 # 查看节点状态
-/usr/local/soft/zookeeper/cluster/zookeeper_1/bin/zkServer.sh status zk1.cfg
+${ZOOKEEPER_PATH}/cluster/${ZOOKEEPER_CLUSER_PREFIX_NAME}1/bin/zkServer.sh status zk1.cfg
 
-/usr/local/soft/zookeeper/cluster/zookeeper_2/bin/zkServer.sh start zk2.cfg
+${ZOOKEEPER_PATH}/cluster/${ZOOKEEPER_CLUSER_PREFIX_NAME}2/bin/zkServer.sh start zk2.cfg
 
-/usr/local/soft/zookeeper/cluster/zookeeper_3/bin/zkServer.sh status zk3.cfg
+${ZOOKEEPER_PATH}/cluster/${ZOOKEEPER_CLUSER_PREFIX_NAME}3/bin/zkServer.sh status zk3.cfg
