@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# ps 这里安装在 /home 下不是很好，建议使用此脚本的修改到对应的目录
 ZOOKEEPER_PATH="/home/mamba/soft/zookeeper"
 
 cluster_num=$1
