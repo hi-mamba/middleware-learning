@@ -7,6 +7,9 @@ import space.service.register.core.ServiceRegistry;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 
 /**
  * @author pankui
@@ -38,6 +41,8 @@ public class WebListener implements ServletContextListener {
 
         String serviceName = applicationName;
         System.out.println("-----------------" + serviceName);
+
+        System.out.println("System IP Address : " + address);
 
         //注册服务
         System.out.println("## 注册服务");

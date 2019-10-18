@@ -1,5 +1,6 @@
 package space.service.client.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,11 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * </pre>
  */
+@Slf4j
 @RestController
 public class HellWorldController {
 
     @GetMapping("/hi/mamba")
     public String hi(){
+        log.info("#### 有人调用我了。。。");
         return "hello mamba";
     }
 }
