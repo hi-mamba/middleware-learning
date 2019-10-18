@@ -33,6 +33,7 @@ public class InitListener implements ServletContextListener {
 
     @Autowired
     private RandomLoadBalance randomLoadBalance;
+
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         try {
@@ -49,13 +50,14 @@ public class InitListener implements ServletContextListener {
     private void updateServerList() {
         List<String> list = new ArrayList<>();
         try {
+            // watch 机制还没有实现，如果服务有变化，这里通知不到，已经使用ZK是公共的，它自己在那里实现了没有通知.
             List<String> children = zooKeeper.getChildren(BASE_SERVICE +"/"+ mambaName, true);
             for (String subNode : children) {
                 byte[] data = zooKeeper.getData(BASE_SERVICE +"/"+ mambaName + "/" + subNode, false, null);
                 String host = new String(data, "utf-8");
                 list.add(host);
             }
-            System.out.println(children);
+            System.out.println("## 节点有变化..."+children);
             //将获取的服务端口和IP保存List中
             randomLoadBalance.setSERVICE_LIST(list);
         } catch (Exception e) {
