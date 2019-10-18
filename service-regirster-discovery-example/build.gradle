@@ -1,0 +1,156 @@
+def vJavaLang = '11'
+
+buildscript {
+
+    repositories {
+        maven {
+            url "/usr/local/repository"
+        }
+        mavenLocal() //优先查找本地maven库，性能最好
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+        maven { url "http://repo.maven.apache.org/maven2" }
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+
+    ext {
+        springBootVersion = "2.1.6.RELEASE"
+    }
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.5'
+        // 解决 src/test 下 lombok不起作用的问题
+        classpath "io.freefair.gradle:lombok-plugin:4.1.0"
+    }
+}
+// 所有模块/项目的通用配置，为所有项目(包括根项目和所有子项目)设置group和version属性
+allprojects {
+
+    //应用插件
+    apply plugin: 'idea'
+    apply plugin: 'jacoco'
+    apply plugin: 'maven'
+    apply plugin: "io.freefair.lombok"
+    group 'space.mamba.service.register.discovery.example'
+    version '1.0-SNAPSHOT'
+
+    // 如果在整个想倒入执行的时候有异常
+    //
+    repositories {
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+        google()
+        jcenter()
+        mavenCentral()
+        maven { url 'https://dl.bintray.com/jetbrains/anko' } //这是你需要加入的，这个是解决这个问题的关键地方，我就是添加这个maven后不再报上面的错误了
+        maven { url "https://maven.google.com" } //谷歌广告
+    }
+}
+
+// 子模块/项目的统一配置
+subprojects {
+    // 所有子项目应用Java插件
+    apply plugin: 'java'
+    apply plugin: "org.springframework.boot"
+    apply plugin: 'com.google.protobuf'
+
+    // 指定JDK版本
+    sourceCompatibility = vJavaLang
+    targetCompatibility = vJavaLang
+
+    // 指定编码格式, java编译的时候缺省状态下会因为中文字符而失败
+    [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
+
+    // 添加这里解决子模块项目依赖导致编译无法通过
+    bootJar { enabled = false }
+    jar { enabled = true }
+
+    // 执行的时候注意项目路径，最外一层不是gradle
+    jacocoTestReport {
+        reports {
+            xml.enabled false
+            html.enabled true
+        }
+    }
+
+    check.dependsOn jacocoTestReport
+
+    repositories {
+
+        maven {
+            url "/usr/local/repository"
+        }
+        // mavenLocal()
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+        maven { url "http://repo.maven.apache.org/maven2" }
+        google()
+        jcenter()
+        mavenCentral()
+    }
+
+    ext {//依赖版本
+        springBootVersion = "2.1.6.RELEASE"
+        mysqlConnectorVersion = "8.0.17"
+        mybatisSpringBootVersion = "2.1.0"
+        fastjsonVersion = "1.2.54"
+    }
+    dependencies {
+
+        compile("org.springframework.boot:spring-boot-starter-web:$springBootVersion")
+        compile("com.alibaba:fastjson:$fastjsonVersion")
+        compile("org.apache.commons:commons-lang3:3.8.1")
+        testCompile("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
+        compile("junit:junit:4.12")
+        testCompile group: 'org.powermock', name: 'powermock-module-junit4', version: '2.0.2'
+        testCompile group: 'org.powermock', name: 'powermock-api-mockito2', version: '2.0.2'
+        compile group: 'org.mockito', name: 'mockito-core', version: '2.23.4'
+        // spring boot 到2.2.0 版本才支持 flyway6.0 ...
+        // testCompile group: 'org.flywaydb', name: 'flyway-core', version: '6.0.2'
+        // 为什么这里设置成 testCompile?
+        // 因为在spring-boot-autoconfigure项目下有一个FlywayAutoConfiguration类，如果不设置testCompile会去执行migration
+        testCompile group: 'org.flywaydb', name: 'flyway-core', version: '5.2.4'
+
+        compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.26'
+        compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+
+        //https://projectlombok.org/setup/gradle  且不用使用 Lombok 插件
+        compileOnly 'org.projectlombok:lombok:1.18.10'
+        testCompileOnly 'org.projectlombok:lombok:1.18.10'
+        annotationProcessor 'org.projectlombok:lombok:1.18.10'
+        compile group: 'com.google.guava', name: 'guava', version: '27.1-jre'
+
+
+    }
+
+    configurations {
+        //移除
+        //移除spring boot 默认logger依赖
+        all*.exclude module: 'spring-boot-starter-logging'
+        all*.exclude module: 'common-logs'
+        all*.exclude group: 'log4j'
+        all*.exclude group: 'org.apache.logging.log4j'
+        all*.exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+    }
+    // gradle 5.x version
+    task dev_local {
+        bootRun { systemProperty "spring.profiles.active", "local" }
+    }
+
+    task dev_kobe {
+        bootRun { systemProperty "spring.profiles.active", "kobe" }
+    }
+
+    task prod {
+        bootRun { systemProperty "spring.profiles.active", "prod" }
+    }
+
+    wrapper {
+        gradleVersion = '5.6.2'
+    }
+
+    test {
+        useJUnit()
+    }
+}

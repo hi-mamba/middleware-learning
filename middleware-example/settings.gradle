@@ -3,4 +3,5 @@ rootProject.name = 'middleware-example'
 include 'rocket-mq-example'
 include 'kafka-exmaple'
 include 'zookeeper-example'
+include 'service-register-zk'
 

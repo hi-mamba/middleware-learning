@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: client-discovery-service
+
+server:
+  port: 8089
+  address: 127.0.0.1
+  mamba:
+    name: client-mamba
