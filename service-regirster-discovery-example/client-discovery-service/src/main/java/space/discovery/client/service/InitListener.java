@@ -38,7 +38,7 @@ public class InitListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         try {
             //连接zk,获得列表信息
-            //watcher机制：监控获取到的服务列表的变化
+            //TODO watcher机制：监控获取到的服务列表的变化
             zooKeeper = ZkClientUtil.getInstance().getZookeeper();
             //第一次连接的时候要返回的列表
             updateServerList();
@@ -50,7 +50,8 @@ public class InitListener implements ServletContextListener {
     private void updateServerList() {
         List<String> list = new ArrayList<>();
         try {
-            // watch 机制还没有实现，如果服务有变化，这里通知不到，已经使用ZK是公共的，它自己在那里实现了没有通知.
+            //TODO watch 机制还没有实现，如果服务有变化，这里通知不到，已经使用ZK是公共的，它自己在那里实现了没有通知.
+            //TODO ZkClientUtil.getInstance().getZookeeper() 这里的watcher 没有去传递到这里来，因此目前这里服务器变化来，还是没有做变化
             List<String> children = zooKeeper.getChildren(BASE_SERVICE +"/"+ mambaName, true);
             for (String subNode : children) {
                 byte[] data = zooKeeper.getData(BASE_SERVICE +"/"+ mambaName + "/" + subNode, false, null);
