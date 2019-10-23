@@ -8,6 +8,9 @@ Zookeeper进入客户端的命令：进入$ZK_HOME后，执行
 
 > ./zkCli.sh -server ip:port
 
+或者执行
+> ./zkCli.sh
+
 可以使用帮助命令help来查看客户端的操作
 ```shell script
 [zk: localhost:2181(CONNECTED) 0] help
