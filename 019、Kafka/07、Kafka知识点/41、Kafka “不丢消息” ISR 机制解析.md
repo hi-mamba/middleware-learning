@@ -7,22 +7,22 @@
 所以大多数在使用的过程中都会在上层或者下层建立一种消息核对或者应对丢失的策略。
 在丢消息这方面，Kafka 算是有着不小的优势，只要去正确使用，Kafka 基本是不会产生丢失的，并且能做到精确一次处理。
 
-Kafka 交付语义、producer中都提到了消息提交给broker中，基本就不会丢消息了，
-而这个不丢消息主要是依赖于broker 中的ISR机制。
+Kafka 交付语义`、producer中都提到了消息提交给broker中，基本就不会丢消息了`，
+而这个**不丢消息主要是依赖于broker 中的`ISR机制`**。
 
-首先Kafka 消息在broker的存储形式是以log的形式存在的，
+首先Kafka 消息在broker的`存储形式是以log`的形式存在的，
 打开Kafka的存储的文件夹时就能发现有.log .index .timeindex 三类文件，
-其中index、timeindex是索引文件，而.log就是具体的消息的存储文件。
+其中index、timeindex是索引文件，而`.log就是具体的消息的存储文件`。
 不同的文件存在于不同的分区，这个是由分区选择器确定的。
 按照常识，要想保证高可用保证不丢失，最直观的就是制造冗余，多做备份，数据互备嘛，Kafka 也是这么去做的。
 
-在Kafka 中备份日志文件被称为replica，   
+在Kafka 中`备份日志文件`被称为 replica，   
 replica 又分为leader replica 和follower replica，   
-而follower replica存在的唯一目的就是防止消息丢失，并不参与具体的业务逻辑的交互。   
+而`follower replica存在的唯一目的就是防止消息丢失`，并不参与具体的业务逻辑的交互。   
 只有leader 才参与服务，follower的作用就是充当leader的候补，平时的操作也只有信息同步。   
 ISR （in-sync replica）也就是这组与leader保持同步的replica集合，我们要保证不丢消息，
-首先要保证ISR的存活（至少有一个备份存活），并且消息提交成功。   
-那存活的概念是什么呢，就是说不仅需要机器正常，还需要跟上leader的消息进度，当达到一定程度的时候就会认为“非存活”状态。
+首先要`保证ISR的存活（至少有一个备份存活），并且消息提交成功`。   
+那存活的概念是什么呢，就是说`不仅需要机器正常，还需要跟上leader的消息进度`，当达到一定程度的时候就会认为“非存活”状态。
 
 ## ISR
 broker offset 大致分为：base offset、high watemark（HW）、log end offset（LEO）这个几个概念非常重要，
@@ -30,12 +30,12 @@ broker offset 大致分为：base offset、high watemark（HW）、log end offse
 
 base offset：起始位移，replica中第一天消息的offset
 
-HW：replica高水印值，副本中最新一条已提交消息的位移。
+HW：replica高水印值，`副本中最新一条已提交消息`的**位移**。
 leader 的HW值也就是实际已提交消息的范围，每个replica都有HW值，但仅仅leader中的HW才能作为标示信息。
 什么意思呢，就是说当按照参数标准成功完成消息备份（成功同步给follower replica后）才会更新HW的值，
 代表消息理论上已经不会丢失，可以认为“已提交”。
 
-LEO：日志末端位移，也就是replica中下一条待写入消息的offset，
+LEO：`日志末端位移`，也就是replica中下一条待写入消息的offset，
 注意哈，是下一条并且是待写入的，并不是最后一条。这个LEO个人感觉也就是用来标示follower的同步进度的。
 
 现在就来看一下之前，broker从收到消息到返回响应这个黑盒子里发生了什么。
@@ -50,22 +50,22 @@ LEO：日志末端位移，也就是replica中下一条待写入消息的offset�
 ![](../../images/kafka/IRS/isr_2.jpg)
 
 
-这里具体需要同步完成的follower的数量是由acks参数来确定的，
-当设定为1的时候仅需要同步给一个follower即可，如果为-1（all），则需要同步所有的follower，   
-如果为0的话就代表不需要同步给follower，记下消息之后立马返回，这样的吞吐量是最好的，
+这里具体需要`同步完成的follower的数量`是由`acks参数`来确定的，
+当设定为`1`的时候`仅需要同步给一个follower`即可，如果为`-1（all）`，则`需要同步所有的follower`，   
+如果为`0`的话就代表`不需要同步给follower`，记下消息之后立马返回，这样的吞吐量是最好的，
 但是对消息的也就不能保证丢了，其实常规环境对消息丢失要求没有那么严苛的环境还是可以使用的。
 常规使用最多的环境应该是设置为1，同步一份就ok了。
 
-ISR（in sync replica）的含义是同步的replica，相对的就有out of sync replica，
+ISR（in sync replica）的含义是同步的 replica，相对的就有out of sync replica，
 也就是跟不上同步节奏的replica，现在面临的有两个问题，
 当replica 跟不上进度时该怎么处理（或原本跟不上节奏的现在又跟上节奏了该如何处理）、如何去判定跟不跟得上节奏。
 
-第一个问题很简单，跟上节奏就加入ISR，跟不上节奏就踢出ISR。
+第一个问题很简单，`跟上节奏就加入ISR，跟不上节奏就踢出ISR`。
 
 ## 关键是如何判定：
 
-在0.9.0.0之前，Kafka提供了replica lag.max.messages 来控制follower副本最多落后leader副本的消息数量，
-follower 相对于leader 落后当超过这个数量的时候就判定该follower是失效的，就会踢出ISR，
+在0.9.0.0之前，Kafka提供了replica lag.max.messages `来控制follower副本最多落后leader副本的消息数量`，
+follower 相对于leader 落后当超过这个数量的时候就判定该 follower是失效的，就会踢出ISR，
 这里的指的是具体的LEO值。
 
 ### 常见的导致同步跟不上的原因主要是下面几个：
