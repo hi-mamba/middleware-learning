@@ -1,6 +1,15 @@
 
 
-# 02、Kafka拓扑结构
+# Kafka框架图和拓扑结构
+
+
+##  Kafka框架图
+
+![](../../images/kafka/kafka-framwoker.png)
+
+
+kafka 其中一个broker 挂掉
+![](../../images/kafka/kafka_controller_Architecture.png)
 
 ## kafka拓扑结构
 

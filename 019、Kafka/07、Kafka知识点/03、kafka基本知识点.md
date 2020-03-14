@@ -15,7 +15,7 @@ kafka消息是根据Topic进行归类,发送消息者成为Producer,消息接收
 ![](../../images/kafka/kafka_1.png)
 (摘自官网) 
 
-其中client与server的通讯,都是基于TCP,而且消息协议非常轻量级.
+其中`client与server的通讯,都是基于TCP,而且消息协议非常轻量级`.
 
 ### Topics/logs
 

@@ -1,7 +1,6 @@
 ## [原文](http://www.thinkyixia.com/2017/10/25/kafka-2/)
 
-# Kafka部分名词解释（kafka相关术语）
-
+# Kafka各组件说明（Kafka部分名词解释）
 
 Kafka中发布订阅的对象是topic。
 我们可以为每类数据创建一个topic，把向topic发布消息的客户端称作producer，从topic订阅消息的客户端称作consumer。
