@@ -4,9 +4,10 @@
 # Zookeeper leader选举(选主流程)
 
 ##  Leader选举概述
+> 半数机制（paxos协议）  
 > ZAB 和 Raft 它们都是Paxos算法的变种
 
-Zookeeper中Leader的选举采用了三种算法：
+Zookeeper中Leader的选举采用了三种算法(选择策略)：
 
 - LeaderElection - 是Fast Paxos最简单的一种实现
 - FastLeaderElection（默认） - 标准的Fast Paxos的实现
