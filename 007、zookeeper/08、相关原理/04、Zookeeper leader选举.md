@@ -24,7 +24,7 @@ Leader选举是保证分布式数据一致性的关键所在。当Zookeeper集�
 ZXID是一个64位的数字，由`Leader统一分配，全局唯一，不断递增`。`ZXID展示了所有的ZooKeeper的变更顺序`。
 每次变更会有一个唯一的zxid，如果zxid1小于zxid2说明zxid1在zxid2之前发生
 
-- 服务器Id(sid): zoo.cfg中配置集群时需要指定server.id
+- 服务器Id(sid): zoo.cfg中配置集群时需要指定server.id(就是myid)
 
 - myid:ZK配置文件myid设置的
 
