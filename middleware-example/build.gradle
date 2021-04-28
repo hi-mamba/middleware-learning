@@ -49,7 +49,7 @@ subprojects {
     // 添加这里解决子模块项目依赖导致编译无法通过
     // 注意这里的配置，如果是FALSE 那么无法打可执行的JAR
     bootJar { enabled = true }
-    jar {enabled = true}
+    jar { enabled = true }
 
     repositories {
         mavenLocal()
@@ -80,6 +80,8 @@ subprojects {
         testCompileOnly 'org.projectlombok:lombok:1.18.10'
         annotationProcessor 'org.projectlombok:lombok:1.18.10'
         compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.26'
+
+        compile group: 'com.alibaba.nacos', name: 'nacos-client', version: '2.0.0'
 
 
     }
