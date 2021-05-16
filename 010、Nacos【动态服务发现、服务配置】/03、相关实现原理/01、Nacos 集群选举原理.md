@@ -49,6 +49,18 @@ Node C、Node D同时成为了candidate，但Node A投了NodeD一票，NodeB投�
 这就出现了平票 split vote的情况。这个时候大家都在等啊等，直到超时后重新发起选举。
 如果出现`平票的情况`，那么就延长了系统不可用的时间,因此raft引入了  `randomizedelection timeouts`来尽量避免平票情况.
 
+> 若 candidate 在 election timeout 中没有新的 leader 产生，则会重新进行 leader election，但这会降低系统的可用性。 
+>为了减少这种情况的发生，Raft 使用 randomized election timeouts：
+>每个节点在开始 leader election 时，会随机设置一个区间范围内的 election timeout
+
+<https://youjiali1995.github.io/raft/basic/>
+
+> 所有人都在给所有人发请求要求 vote 自己，怎么能达到有一个 candidate 获取到 大多数 vote 呢?
+raft 采用了 randomized election timeout 来解决这个问题。
+不同 server 的 election timout 不一样，避免了大部分情况下的 split vote 情况。
+如果发生 split vote, 重来一次。这种机制跟 TCP 的拥塞控制有些类似。
+
+
 
 ### 投票逻辑
 判断收到的请求的term是不是过期的数据，如果是，则认为对方的这个票据无效，直接告诉发送这个票据的节点，你应该选择当前收到请求的节点。
