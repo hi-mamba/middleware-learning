@@ -3,6 +3,8 @@
 
 [面试时遇到『看门狗』脖子上挂着『时间轮』，我就问你怕不怕？](https://zhuanlan.zhihu.com/p/120847051)
 
+<https://www.mistray.site/2020/02/28/Redisson%E9%94%81%E7%BB%AD%E7%BA%A6%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/>
+
 # Redisson实现可重入分布式锁原理
 
 ## 主流的分布式锁一般有三种实现方式:

@@ -34,7 +34,7 @@ allprojects {
     apply plugin: 'jacoco'
     apply plugin: 'maven'
     apply plugin: "io.freefair.lombok"
-    group 'space.mamba.service.register.discovery.example'
+    group 'space.mamba.mamba.service.register.discovery.example'
     version '1.0-SNAPSHOT'
 
     // 如果在整个想倒入执行的时候有异常

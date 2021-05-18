@@ -1,8 +1,7 @@
-
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 
     // 获取的是本地的服务，因此你需要把这个JAR 上传到本地,
-    compile group: 'space.mamba.service.register.discovery.example',name: 'register-core', version: '1.0-SNAPSHOT'
+    compile group: 'space.mamba.mamba.service.register.discovery.example', name: 'register-core', version: '1.0-SNAPSHOT'
 }
 

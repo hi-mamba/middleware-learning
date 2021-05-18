@@ -1,5 +1,4 @@
-
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
-    compile group: 'space.mamba.service.register.discovery.example', name: 'register-core', version: '1.0-SNAPSHOT'
+    compile group: 'space.mamba.mamba.service.register.discovery.example', name: 'register-core', version: '1.0-SNAPSHOT'
 }
