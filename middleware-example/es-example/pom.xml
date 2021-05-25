@@ -23,7 +23,7 @@
             <artifactId>transport</artifactId>
         </dependency>
         <dependency>
-            <groupId>space.mamba.mamba</groupId>
+            <groupId>space.mamba</groupId>
             <artifactId>common-example</artifactId>
         </dependency>
     </dependencies>

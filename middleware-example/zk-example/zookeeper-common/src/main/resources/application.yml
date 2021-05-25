@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: zookeeper-common
+
+server:
+  port: 8280

@@ -14,13 +14,22 @@
     <modules>
         <module>zookeeper-service-register</module>
         <module>zookeeper-example</module>
+        <module>resister-discovery-client-server1</module>
+        <module>zookeeper-common</module>
+        <module>resister-discovery-client-server2</module>
     </modules>
 
     <dependencies>
         <dependency>
-            <groupId>space.mamba.mamba</groupId>
+            <groupId>space.mamba</groupId>
             <artifactId>common-example</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>space.mamba</groupId>
+            <artifactId>zookeeper-common</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.apache.curator</groupId>
             <artifactId>curator-framework</artifactId>
@@ -33,7 +42,6 @@
             <groupId>org.apache.curator</groupId>
             <artifactId>curator-recipes</artifactId>
         </dependency>
-
     </dependencies>
 
 </project>

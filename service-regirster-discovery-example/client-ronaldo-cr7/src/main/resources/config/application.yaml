@@ -1,7 +1,0 @@
-spring:
-  application:
-    name: client-ronaldo-cr7
-
-server:
-  port: 8088
-  address: 127.0.0.1

@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: zookeeper-service-register-client
+
+server:
+  port: 8282
+
+
+register:
+  server:
+    address: http://localhost:8280

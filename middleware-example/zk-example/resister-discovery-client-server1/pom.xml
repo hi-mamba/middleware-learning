@@ -9,13 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>zookeeper-service-register</artifactId>
+    <artifactId>resister-discovery-client-server1</artifactId>
 
-    <dependencies>
-        <dependency>
-            <groupId>space.mamba</groupId>
-            <artifactId>zookeeper-common</artifactId>
-        </dependency>
-    </dependencies>
 
 </project>

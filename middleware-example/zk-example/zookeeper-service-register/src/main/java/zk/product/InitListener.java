@@ -1,7 +1,6 @@
 package zk.product;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -20,8 +19,6 @@ import java.net.InetAddress;
 @Component
 public class InitListener implements ServletContextListener {
 
-    @Autowired
-    public ServiceRegister serviceRegistry;
 
     @Value("${server.port}")
     private String serverPort;
@@ -38,7 +35,7 @@ public class InitListener implements ServletContextListener {
             //获得端口
             int port = Integer.parseInt(serverPort);
             log.info("### 服务注册 hostAddress={},port={}", hostAddress, port);
-            serviceRegistry.register(hostAddress, port);
+            // serviceRegistry.register(hostAddress, port);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -1,6 +1,0 @@
-rootProject.name = 'service-regirster-discovery-example'
-include 'register-core'
-include 'client-mamba'
-include 'client-ronaldo-cr7'
-include 'client-discovery-service'
-

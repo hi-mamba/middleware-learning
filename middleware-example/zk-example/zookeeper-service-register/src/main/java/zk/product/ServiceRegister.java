@@ -7,7 +7,6 @@ import org.apache.zookeeper.ZooDefs;
 import org.apache.zookeeper.ZooKeeper;
 import org.apache.zookeeper.data.Stat;
 import org.springframework.stereotype.Service;
-import zk.util.ZkClientUtil;
 
 
 /**
@@ -34,7 +33,7 @@ public class ServiceRegister {
          * 在ZK 创建根节点 path，在跟节点下创建临时子节点用于存放服务IP 和端口
          * */
         try {
-            ZooKeeper zookeeper = ZkClientUtil.getInstance().getZookeeper();
+            ZooKeeper zookeeper = null;//ZkClientUtil.getInstance().getZookeeper();
             System.out.println(zookeeper);
             Stat exists = zookeeper.exists(BASE_SERVICE, false);
             //先判断服务根路径是否存在
