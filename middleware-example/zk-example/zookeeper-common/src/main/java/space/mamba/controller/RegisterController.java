@@ -22,7 +22,7 @@ public class RegisterController {
     private RegisterService registerService;
 
     @GetMapping("/register")
-    public int register(String serviceName, String serviceAddress) {
+    public int registerServer(String serviceName, String serviceAddress) {
         registerService.register(serviceName, serviceAddress);
         return 1;
     }

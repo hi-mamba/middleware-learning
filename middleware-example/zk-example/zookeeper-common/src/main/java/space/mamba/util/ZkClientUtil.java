@@ -60,6 +60,23 @@ public class ZkClientUtil {
         }
     }
 
+    //  private CuratorFramework client;
+//
+    //  private List children;
+//
+    //  public void CuratorServiceDiscover() {
+    //      try {
+    //          client = CuratorFrameworkFactory.builder().connectString(ZOOKEEPER_ADDRESS)
+    //                  .retryPolicy(new ExponentialBackoffRetry(1000, 3))
+    //                  .build(); /* 使用前必须启动 */
+    //          client.start(); /* 获取初始节点列表 */
+    //          children = client.getChildren().usingWatcher(this).forPath(REGISTRY_PATH);
+    //          System.out.println("初始监听目录节点列表：" + children);
+    //      } catch (Exception e) {
+    //          e.printStackTrace();
+    //      }
+    //  }
+//
     private void closeZk() {
         try {
             zookeeper.close();

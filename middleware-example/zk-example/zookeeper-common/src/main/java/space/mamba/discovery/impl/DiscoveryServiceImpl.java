@@ -1,6 +1,8 @@
 package space.mamba.discovery.impl;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.zookeeper.WatchedEvent;
+import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooKeeper;
 import org.springframework.stereotype.Service;
 import space.mamba.discovery.DiscoveryService;
@@ -20,7 +22,7 @@ import java.util.List;
  */
 @Slf4j
 @Service
-public class DiscoveryServiceImpl implements DiscoveryService, ServletContextListener {
+public class DiscoveryServiceImpl implements DiscoveryService, ServletContextListener, Watcher {
 
     private ZooKeeper zooKeeper;
 
@@ -55,5 +57,29 @@ public class DiscoveryServiceImpl implements DiscoveryService, ServletContextLis
             e.printStackTrace();
         }
         return list;
+    }
+
+    @Override
+    public void process(WatchedEvent watchedEvent) {
+        // try { /* 获取最新节点列表 */
+        //     final List newChildren = zooKeeper.getChildren().usingWatcher(this).forPath(path); /* 新节点列表大于旧节点列表，说明有节点上线，反之有节点下线 */
+        //     if (newChildren.size() > children.size()) {
+        //         for (String child : newChildren) { /* 取出旧节点列表中不包含新节点，即为上线 */
+        //             if (!children.contains(child)) {
+        //                 System.out.println("上线节点：" + child);
+        //             }
+        //         }
+        //     } else {
+        //         for (String child : children) { /* 取出新节点列表中不包含旧节点，即为下线 */
+        //             if (!newChildren.contains(child)) {
+        //                 System.out.println("下线节点：" + child);
+        //             }
+        //         }
+        //     } /* 更新节点列表 */
+        //     children = newChildren;
+        // } catch (Exception e) {
+        //     e.printStackTrace();
+        // }
+        System.out.println("");
     }
 }

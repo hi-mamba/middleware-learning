@@ -2,6 +2,7 @@ package space.mamba.register.impl;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.zookeeper.CreateMode;
+import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooDefs;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import space.mamba.register.RegisterService;
 import space.mamba.util.ZkClientUtil;
 
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
 /**
@@ -55,6 +57,18 @@ public class RegistryServiceImpl implements RegisterService, Watcher {
 
     @Override
     public void process(WatchedEvent watchedEvent) {
+        // 获取服务器子节点信息，并且对父节点进行监听
+        String registryPath = ZkClientUtil.REGISTRY_PATH;
+        ZooKeeper zooKeeper = ZkClientUtil.getInstance().getZookeeper();
+        try {
+            List<String> children = zooKeeper.getChildren(registryPath, true);
+            log.info("children={}", children);
+        } catch (KeeperException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         if (watchedEvent.getState() == Event.KeeperState.SyncConnected) {
             latch.countDown();
         }
