@@ -1,0 +1,13 @@
+version: '3'
+services:
+  mysql:
+    # mysql 镜像
+    image: bitnami/mysql:5.7.26
+    environment:
+      # 初始化mysql环境变量
+      MYSQL_DATABASE: test
+      MYSQL_ROOT_PASSWORD: "123456"
+      TZ: Asia/Shanghai
+    # 暴露端口号
+    ports:
+      - 3306:3306
