@@ -8,6 +8,12 @@
 
 # MyBatis Plus自动生成代码
 
+> 项目启动的时候会全部注入"自定义方法" 
+```
+com.baomidou.mybatisplus.core.injector.AbstractMethod.inject //这里是注入方法
+com.baomidou.mybatisplus.core.injector.DefaultSqlInjector   //默认注入
+```
+
 ## 代码生成器
 
 > SqlSessionFactory中有个非常重要的对象 Configuration
