@@ -15,6 +15,7 @@
         <module>rocketmq-example</module>
         <module>zk-example</module>
         <module>mybatis-plus-example</module>
+        <module>redisson-example</module>
     </modules>
 
     <properties>
@@ -38,6 +39,7 @@
         <swagger.version>2.1.9</swagger.version>
         <springfox.version>3.0.0</springfox.version>
         <mysql.version>8.0.24</mysql.version>
+        <redisson.version>3.15.5</redisson.version>
     </properties>
 
     <dependencyManagement>
@@ -184,6 +186,12 @@
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson</artifactId>
+                <version>${redisson.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
