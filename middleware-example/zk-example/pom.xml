@@ -24,12 +24,7 @@
             <groupId>space.mamba</groupId>
             <artifactId>common-example</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>space.mamba</groupId>
-            <artifactId>zookeeper-common</artifactId>
-        </dependency>
-
+        <!-- 这里不能应用 zk-common -->
         <dependency>
             <groupId>org.apache.curator</groupId>
             <artifactId>curator-framework</artifactId>

@@ -16,9 +16,12 @@
         <module>zk-example</module>
         <module>mybatis-plus-example</module>
         <module>redisson-example</module>
+        <module>mybatis-example</module>
     </modules>
 
     <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
         <zk.version>3.7.0</zk.version>
         <nacos.client.version>2.0.0</nacos.client.version>
         <kafka.client.version>2.8.0</kafka.client.version>
@@ -31,11 +34,13 @@
         <guava.version>30.1.1-jre</guava.version>
         <jackson.version>2.12.3</jackson.version>
         <common-example.version>1.0.0</common-example.version>
+        <zookeeper-common.version>1.0.0</zookeeper-common.version>
         <rocketmq.version>4.8.0</rocketmq.version>
         <spring-boot.version>2.4.5</spring-boot.version>
         <spring-retry.version>1.3.1</spring-retry.version>
         <curator-framework.version>5.1.0</curator-framework.version>
         <mybatis-plus.version>3.4.3</mybatis-plus.version>
+        <mybatis.version>2.2.0</mybatis.version>
         <swagger.version>2.1.9</swagger.version>
         <springfox.version>3.0.0</springfox.version>
         <mysql.version>8.0.24</mysql.version>
@@ -44,6 +49,15 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <!-- 依赖管理器的pom文件,通过<dependencyManagement/>提供出来的。并不会真正被项目引入 -->
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
             <dependency>
                 <groupId>org.apache.zookeeper</groupId>
                 <artifactId>zookeeper</artifactId>
@@ -102,22 +116,29 @@
                 <artifactId>httpclient</artifactId>
                 <version>${apache.httpclient.verison}</version>
             </dependency>
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-core</artifactId>
-                <version>${jackson.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-databind</artifactId>
-                <version>${jackson.version}</version>
-            </dependency>
+            <!--   冲突，需要去掉
+                <dependency>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-core</artifactId>
+                    <version>${jackson.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-databind</artifactId>
+                    <version>${jackson.version}</version>
+                </dependency>-->
 
             <!--common包-->
             <dependency>
                 <groupId>space.mamba</groupId>
                 <artifactId>common-example</artifactId>
                 <version>${common-example.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>space.mamba</groupId>
+                <artifactId>zookeeper-common</artifactId>
+                <version>${zookeeper-common.version}</version>
             </dependency>
 
             <dependency>
@@ -134,18 +155,6 @@
                 <groupId>org.apache.rocketmq</groupId>
                 <artifactId>rocketmq-remoting</artifactId>
                 <version>${rocketmq.version}</version>
-            </dependency>
-
-
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-web</artifactId>
-                <version>${spring-boot.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-jdbc</artifactId>
-                <version>${spring-boot.version}</version>
             </dependency>
 
             <dependency>
@@ -170,6 +179,14 @@
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>${mybatis-plus.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+
+
             <!--
                         <dependency>
                             <groupId>io.swagger.core.v3</groupId>
