@@ -1,4 +1,4 @@
-package space.mamba;
+package space.mamba.example1;
 
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexResponse;
@@ -43,15 +43,9 @@ public class EsDemo {
     public static IndexResponse index() {
 
         try {
-            IndexResponse response = client.prepareIndex("twitter", "tweet", "1")
-                    .setSource(jsonBuilder()
-                            .startObject()
-                            .field("user", "kimchy")
-                            .field("postDate", new Date())
-                            .field("message", "trying out Elasticsearch")
-                            .endObject()
-                    )
-                    .get();
+            IndexResponse response = client.prepareIndex("twitter", "tweet", "1").setSource(
+                    jsonBuilder().startObject().field("user", "kimchy").field("postDate", new Date())
+                            .field("message", "trying out Elasticsearch").endObject()).get();
             return response;
         } catch (IOException e) {
             e.printStackTrace();

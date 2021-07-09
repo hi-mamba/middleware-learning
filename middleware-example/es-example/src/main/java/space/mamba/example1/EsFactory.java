@@ -1,4 +1,4 @@
-package space.mamba;
+package space.mamba.example1;
 
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
@@ -21,8 +21,7 @@ public class EsFactory {
     public static TransportClient getTransportClient() {
         TransportClient client = null;
         try {
-            Settings settings = Settings.builder()
-                    .put("cluster.name", "elasticsearch").build();
+            Settings settings = Settings.builder().put("cluster.name", "elasticsearch").build();
 
             client = new PreBuiltTransportClient(settings)
                     .addTransportAddress(new TransportAddress(InetAddress.getByName("127.0.0.1"), 9300));

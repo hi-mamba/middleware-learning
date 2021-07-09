@@ -45,6 +45,8 @@
         <springfox.version>3.0.0</springfox.version>
         <mysql.version>8.0.24</mysql.version>
         <redisson.version>3.15.5</redisson.version>
+        <logstash-logback-encoder.version>6.6</logstash-logback-encoder.version>
+        <x-pack-sql-jdbc.version>7.9.3</x-pack-sql-jdbc.version>
     </properties>
 
     <dependencyManagement>
@@ -127,6 +129,17 @@
                     <artifactId>jackson-databind</artifactId>
                     <version>${jackson.version}</version>
                 </dependency>-->
+            <dependency>
+                <groupId>net.logstash.logback</groupId>
+                <artifactId>logstash-logback-encoder</artifactId>
+                <version>${logstash-logback-encoder.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.elasticsearch.plugin</groupId>
+                <artifactId>x-pack-sql-jdbc</artifactId>
+                <version>${x-pack-sql-jdbc.version}</version>
+            </dependency>
 
             <!--common包-->
             <dependency>

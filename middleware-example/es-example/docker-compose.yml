@@ -1,0 +1,35 @@
+version: '2'
+services:
+
+  elasticsearch:
+    image: elasticsearch:7.9.3
+    container_name: elasticsearch7.9.3
+    environment:
+      - bootstrap.memory_lock=true   # 内存交换的选项，官网建议为true
+      - "ES_JAVA_OPTS=-Xms256m -Xmx256m" # 设置内存，如内存不足，可以尝试调低点
+      - discovery.type=single-node      # 是否启用单节点模式
+    ulimits: # 栈内存的上限
+      memlock:
+        soft: -1    # 不限制
+        hard: -1    # 不限制
+    # volumes:
+    #  - ~/top/data/elasticsearch/config:/usr/share/elasticsearch/config
+    #  - ~/top/data/elasticsearch/data:/usr/share/elasticsearch/data
+    #  - ~/top/data/elasticsearch/logs:/usr/share/elasticsearch/logs
+    hostname: elasticsearch
+    restart: always
+    ports:
+      - 9200:9200
+      - 9300:9300
+
+  kibana:
+    image: kibana:7.9.3
+    container_name: kibana7.9.3
+    environment:
+      - elasticsearch.hosts=http://elasticsearch:9200
+    hostname: kibana
+    depends_on:
+      - elasticsearch
+    restart: always
+    ports:
+      - 5601:5601
