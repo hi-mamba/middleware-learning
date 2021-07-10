@@ -33,10 +33,12 @@ public class ESJdbcTest {
         try {
             Connection connection = DriverManager.getConnection(address, connectionProperties);
             Statement statement = connection.createStatement();
-            ResultSet results = statement
-                    .executeQuery("SELECT firstname, account_number FROM bank ORDER BY account_number DESC LIMIT 5");
+
+            String sql = "CREATE TABLE persons ( id int,name varchar(255)))";
+            statement.execute(sql);
+            ResultSet results = statement.executeQuery("SELECT * FROM persons DESC LIMIT 5");
             while (results.next()) {
-                System.out.println(results.getString("firstname"));
+                System.out.println(results.getString("id"));
             }
         } catch (Exception e) {
             e.printStackTrace();

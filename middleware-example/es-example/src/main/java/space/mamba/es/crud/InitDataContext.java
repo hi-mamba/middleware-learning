@@ -2,6 +2,7 @@ package space.mamba.es.crud;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
 import space.mamba.es.crud.service.UserService;
 
 import javax.annotation.Resource;
@@ -14,7 +15,7 @@ import javax.annotation.Resource;
  * </pre>  
  */
 @Slf4j
-//@Component
+@Component
 public class InitDataContext implements CommandLineRunner {
 
     @Resource
@@ -23,6 +24,6 @@ public class InitDataContext implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         log.info("初始化数据");
-        // userService.insert();
+        userService.insert();
     }
 }
