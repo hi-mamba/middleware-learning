@@ -1,35 +1,31 @@
-version: '2'
-services:
+version: "3.9"
 
+services:
   elasticsearch:
-    image: elasticsearch:7.9.3
-    container_name: elasticsearch7.9.3
-    environment:
-      - bootstrap.memory_lock=true   # 内存交换的选项，官网建议为true
-      - "ES_JAVA_OPTS=-Xms256m -Xmx256m" # 设置内存，如内存不足，可以尝试调低点
-      - discovery.type=single-node      # 是否启用单节点模式
-    ulimits: # 栈内存的上限
-      memlock:
-        soft: -1    # 不限制
-        hard: -1    # 不限制
-    # volumes:
-    #  - ~/top/data/elasticsearch/config:/usr/share/elasticsearch/config
-    #  - ~/top/data/elasticsearch/data:/usr/share/elasticsearch/data
-    #  - ~/top/data/elasticsearch/logs:/usr/share/elasticsearch/logs
-    hostname: elasticsearch
-    restart: always
+    image: 117503445/elasticsearch
+    container_name: elasticsearch
+    restart: unless-stopped
     ports:
-      - 9200:9200
-      - 9300:9300
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - ./docker/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    # - ./data:/usr/share/elasticsearch/data # ./data should have 777 permission
+    environment:
+      ELASTICSEARCH_USERNAME: elastic
+      ELASTIC_PASSWORD: elastic
+      discovery.type: single-node
 
   kibana:
-    image: kibana:7.9.3
-    container_name: kibana7.9.3
-    environment:
-      - elasticsearch.hosts=http://elasticsearch:9200
-    hostname: kibana
+    image: docker.elastic.co/kibana/kibana:7.12.0
+    container_name: kibana
+    restart: unless-stopped
+    ports:
+      - "5601:5601"
     depends_on:
       - elasticsearch
-    restart: always
-    ports:
-      - 5601:5601
+    volumes:
+      - ./docker/kibana.yml:/usr/share/kibana/config/kibana.yml
+    environment:
+      ELASTICSEARCH_USERNAME: elastic
+      ELASTICSEARCH_PASSWORD: elastic

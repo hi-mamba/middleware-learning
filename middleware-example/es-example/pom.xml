@@ -18,6 +18,7 @@
             <groupId>org.elasticsearch.plugin</groupId>
             <artifactId>x-pack-sql-jdbc</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
@@ -30,6 +31,25 @@
             <groupId>space.mamba</groupId>
             <artifactId>common-example</artifactId>
         </dependency>
+        <!--
+
+                <dependency>
+                    <groupId>com.baomidou</groupId>
+                    <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
+                </dependency>
+        -->
+
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jodd</groupId>
+            <artifactId>jodd-bean</artifactId>
+            <version>5.1.6</version>
+            <scope>compile</scope>
+        </dependency>
+
     </dependencies>
 
 </project>

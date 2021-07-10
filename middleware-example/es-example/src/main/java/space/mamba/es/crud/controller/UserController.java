@@ -25,4 +25,9 @@ public class UserController {
     public Object list() {
         return userService.list();
     }
+
+    @GetMapping("/sql")
+    public void sql() {
+        userService.customSql();
+    }
 }

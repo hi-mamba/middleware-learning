@@ -47,6 +47,7 @@
         <redisson.version>3.15.5</redisson.version>
         <logstash-logback-encoder.version>6.6</logstash-logback-encoder.version>
         <x-pack-sql-jdbc.version>7.9.3</x-pack-sql-jdbc.version>
+        <dynamic-ds.version>3.4.0</dynamic-ds.version>
     </properties>
 
     <dependencyManagement>
@@ -223,6 +224,13 @@
                 <artifactId>redisson</artifactId>
                 <version>${redisson.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
+                <version>${dynamic-ds.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
