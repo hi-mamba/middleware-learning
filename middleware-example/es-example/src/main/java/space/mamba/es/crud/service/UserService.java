@@ -3,7 +3,7 @@ package space.mamba.es.crud.service;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Service;
-import space.mamba.es.crud.dao.ESMapper;
+import space.mamba.es.crud.dao.UserDAO;
 import space.mamba.es.crud.domain.User;
 
 import javax.annotation.Resource;
@@ -19,29 +19,28 @@ import java.util.Map;
 @Service
 public class UserService {
 
-    // @Resource
-    // private UserDAO userDAO;
-
     @Resource
-    private ESMapper esMapper;
+    private UserDAO userDAO;
+
+    // @Resource
+    // private ESMapper esMapper;
 
     public void insert() {
         User user = new User();
         user.setId(System.currentTimeMillis());
         user.setName(RandomStringUtils.random(10));
-        //  User result = userDAO.save(user);
-        //  log.info("insert user ={}", result);
+        User result = userDAO.save(user);
+        log.info("insert user ={}", result);
     }
 
     public Iterable<User> list() {
-        //  return userDAO.findAll();
-        return null;
+        return userDAO.findAll();
     }
 
     public void customSql() {
         Map<String, String> map = new HashMap<>();
         map.put("sql", "select * from user limit 1");
-        log.info("result=", esMapper.selectMap(map));
+        //  log.info("result=", esMapper.selectMap(map));
         // 输出： {eid=z, reason=}
     }
 }

@@ -1,7 +1,5 @@
 package space.mamba.es.crud.dao;
 
-import com.baomidou.dynamic.datasource.annotation.DS;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.Map;
@@ -13,8 +11,8 @@ import java.util.Map;
  *
  * </pre>  
  */
-@DS("es")
-@Mapper
+//@DS("es")
+//@Mapper
 public interface ESMapper {
 
     @Select("${sql}")

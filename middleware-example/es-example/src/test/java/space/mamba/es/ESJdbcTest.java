@@ -34,9 +34,11 @@ public class ESJdbcTest {
             Connection connection = DriverManager.getConnection(address, connectionProperties);
             Statement statement = connection.createStatement();
 
-            String sql = "CREATE TABLE persons ( id int,name varchar(255)))";
-            statement.execute(sql);
-            ResultSet results = statement.executeQuery("SELECT * FROM persons DESC LIMIT 5");
+            //目前执行 创建有问题
+            //    String sql = "create table persons ( id int,name varchar(255)))";
+            //    statement.execute(sql);
+            // 查询这个 索引必须存在，　
+            ResultSet results = statement.executeQuery("SELECT * FROM persons");
             while (results.next()) {
                 System.out.println(results.getString("id"));
             }
