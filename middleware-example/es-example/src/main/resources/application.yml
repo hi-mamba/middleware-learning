@@ -1,0 +1,30 @@
+spring:
+  datasource:
+    url: jdbc:es://127.0.0.1:9200?user=elastic&password=elastic
+    #ConnectionTestQuery: SELECT 1
+    driverClassName: org.elasticsearch.xpack.sql.jdbc.EsDriver
+    type: com.zaxxer.hikari.HikariDataSource
+    username: elastic
+    password: elastic
+    mapperLocations: classpath*:esMapper/*.xml
+
+
+  mybatis-plus:
+    mapper-locations: classpath*:mapper/*.xml
+    global-config:
+      refresh: true
+      db-config:
+        db-type: mysql
+        id-type: uuid
+        logic-delete-value: 1
+        logic-not-delete-value: 0
+        table-prefix: hydra_
+        table-underline: true
+    configuration:
+      map-underscore-to-camel-case: true
+      aggressive-lazy-loading: true
+      auto-mapping-behavior: partial
+      auto-mapping-unknown-column-behavior: none
+      cache-enabled: true
+      call-setters-on-nulls: false
+      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
