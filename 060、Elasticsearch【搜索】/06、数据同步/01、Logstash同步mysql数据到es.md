@@ -43,7 +43,7 @@ output {
 
 ## 运行Logstash来加载我们的MySQL里的数据到Elasticsearch中
 
-> ./bin/logstash --debug -f /data/mysql-to-elasticsearch.conf
+> sudo ./bin/logstash --debug -f /data/mysql-to-elasticsearch.conf
 
 ## 说明：
 
