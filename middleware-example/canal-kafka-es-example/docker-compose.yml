@@ -1,5 +1,5 @@
 version: "3.9"
-
+# https://juejin.cn/post/6844904056301830152 网络问题
 services:
   elasticsearch:
     image: 117503445/elasticsearch
@@ -9,12 +9,13 @@ services:
       - "9200:9200"
       - "9300:9300"
     volumes:
-      - ./docker/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
-    # - ./data:/usr/share/elasticsearch/data # ./data should have 777 permission
+      - /usr/local/docker_app/es/data:/data/es
+    network_mode: "host"
     environment:
       ELASTICSEARCH_USERNAME: elastic
       ELASTIC_PASSWORD: elastic
       discovery.type: single-node
+      ES_JAVA_OPTS: "-Xms255m -Xmx255m"
 
   kibana:
     image: docker.elastic.co/kibana/kibana:7.12.0
@@ -25,17 +26,21 @@ services:
     depends_on:
       - elasticsearch
     volumes:
-      - ./docker/kibana.yml:/usr/share/kibana/config/kibana.yml
+      - /usr/local/docker_app/es/data:/data/es
     environment:
       ELASTICSEARCH_USERNAME: elastic
       ELASTICSEARCH_PASSWORD: elastic
+      ES_JAVA_OPTS: "-Xms255m -Xmx255m"
+    network_mode: "host"
 
   zookeeper:
     image: wurstmeister/zookeeper
     environment:
       JMX: 9000
+      ES_JAVA_OPTS: "-Xms255m -Xmx255m"
     ports:
       - "2181:2181"
+    network_mode: "host"
   kafka:
     image: wurstmeister/kafka  #这个镜像使用文档见https://github.com/wurstmeister/kafka-docker
     ports:
@@ -46,18 +51,8 @@ services:
       KAFKA_ADVERTISED_HOST_NAME: 127.0.0.1  #docker宿主机的IP，直接ifconfig获取，这是重点，否则，在容器内部启动生产者消费者都会失败的
       KAFKA_CREATE_TOPICS: "test:1:1"  #自动创建一个默认的topic
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "false"  #禁用掉自动创建topic的功能，使用上面的镜像，kafka的参数设置都可以以这样的方式进行设置
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"  #不禁用掉自动创建topic的功能，使用上面的镜像，kafka的参数设置都可以以这样的方式进行设置
+      ES_JAVA_OPTS: "-Xms255m -Xmx255m"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-  kafka-manager:
-    image: sheepkiller/kafka-manager  #如果要安装web管理工具可以同时安装这个，最后通过宿主机IP的9000端口进行访问，例如http://127.0.0.1:9000/
-    links:
-      - kafka
-      - zookeeper
-    environment:
-      ZK_HOSTS: zookeeper:2181
-      APPLICATION_SECRET: "letmein"
-    ports:
-      - "9000:9000"
-    expose:
-      - "9000"
+    network_mode: "host"

@@ -49,5 +49,5 @@ spring:
             instance-index: 0                 # 当前实例的下标，这里指定了一个，多实例启动时指定另一个
             concurrency: 2
         share_order_log_output:
-          destination: student_topic  # 订阅的topic
+          destination: student  # 订阅的topic
           content-type: application/json            # 消息的格式
