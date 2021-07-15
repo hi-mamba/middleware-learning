@@ -1,11 +1,11 @@
 package space.mamba;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import space.mamba.register.ServiceRegisterExample01;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import java.net.InetAddress;
@@ -21,7 +21,7 @@ import java.net.InetAddress;
 @Component
 public class InitListener implements ServletContextListener {
 
-    @Autowired
+    @Resource
     public ServiceRegisterExample01 serviceRegisterExample01;
 
     @Value("${server.port}")
