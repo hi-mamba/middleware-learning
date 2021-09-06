@@ -4,6 +4,7 @@
 
 # Nacos 服务注册的原理
 
+
 ## Nacos 服务注册需要具备的能力：
 
 - 服务提供者把自己的协议地址注册到Nacos server
@@ -18,6 +19,10 @@
 
 ## Nacos的实现原理
 
+
+ ![image](https://user-images.githubusercontent.com/7867225/132182216-6ae089ed-4f64-4996-b86c-38f25819ae0b.png)
+
+
 - 启动的时候 nacos客户端从naocs server中读取指定服务名称的实例列表，缓存到本地
 
 > nacos 服务器地址在项目配置好
@@ -31,4 +36,3 @@
 
 
 
- 

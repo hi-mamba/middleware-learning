@@ -1,3 +1,5 @@
+[Nacos 配置实时更新原理分析](https://www.jianshu.com/p/acb9b1093a54)
+
 
 
 # Nacos 客户端如何实时监听到 Nacos 服务端配置更新
