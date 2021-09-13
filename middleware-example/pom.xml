@@ -19,6 +19,7 @@
         <module>mybatis-example</module>
         <module>canal-kafka-es-example</module>
         <module>spring-cloud-stream-kafka-example</module>
+        <module>mini-middleware-example</module>
     </modules>
 
     <properties>
