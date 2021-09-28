@@ -94,3 +94,26 @@ spec:
   Content-Type  #参数类型
   sleep         #等待120秒
 ```
+
+## 注意
+由于打开`/actuate`服务上下线也暴露到外网，因此在 Spring cloud gateway 做拦截，不让访问。k8s 通过内网调用应用服务
+
+```java
+@Order(0)
+@Component
+public class AuthFilter implements GlobalFilter {
+
+    @Override
+    public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+        ServerHttpRequest request = exchange.getRequest();
+        String url = request.getPath().pathWithinApplication().value();
+        //做拦截,以 /xxx/actuate 开头的做拦截
+        if (StringUtils.contains(url, "/xxx/actuate")) {
+            //这里也可以直接做返回
+            throw new BusinessException("无效请求");
+        }
+        return chain.filter(exchange);
+    }
+}
+
+```
