@@ -60,6 +60,15 @@ management:
 
 ### 请求地址:
 
+如果注册中心是nacos ，则不需要服务提供下面接口，直接调用naocs 来操作下线，
+nacos 接口
+
+```bash
+post请求: http://127.0.0.1:8848/nacos/v1/ns/instance?serviceName=服务名次&ip=ip地址&port=端口&enabled=false
+
+enabled:false 操作下线
+```
+
 ```html
 //服务从注册中心下线
 http://127.0.0.1:9210/actuator/service-registry?status=DOWN
