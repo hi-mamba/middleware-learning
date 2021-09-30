@@ -144,5 +144,7 @@ public class AuthFilter implements GlobalFilter {
 
 ![image](https://user-images.githubusercontent.com/7867225/135383823-87644f60-af81-4231-b4d3-59373814070c.png)
 
-k8s 第三步之后你的pod 已经不能访问了
+k8s 第三步之后你的pod 已经不能访问了,
+所以目前的方案，还是有损的
+
 
