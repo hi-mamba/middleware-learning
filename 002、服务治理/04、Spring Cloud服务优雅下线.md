@@ -1,5 +1,6 @@
 [原文](https://www.jianshu.com/p/1e628a74ac90)
 
+
 # Spring Cloud服务优雅下线
 
 > nacos 也可以参考这种方式
@@ -126,3 +127,22 @@ public class AuthFilter implements GlobalFilter {
 }
 
 ```
+
+
+## k8s 优雅下线遇到问题
+
+<https://i4t.com/4424.html>
+
+<https://pingcap.com/zh/blog/tidb-opeartor-webhook>
+
+<https://www.kubernetes.org.cn/7714.html>
+
+<https://kubernetes.io/zh/docs/concepts/workloads/pods/pod-lifecycle/>
+
+
+
+
+![image](https://user-images.githubusercontent.com/7867225/135383823-87644f60-af81-4231-b4d3-59373814070c.png)
+
+k8s 第三步之后你的pod 已经不能访问了
+
