@@ -1,5 +1,6 @@
 [原文](https://www.jianshu.com/p/1e628a74ac90)
 
+
 # Spring Cloud服务优雅下线
 
 > nacos 也可以参考这种方式
@@ -62,6 +63,15 @@ management:
 
 ### 请求地址:
 
+如果注册中心是nacos ，则不需要服务提供下面接口，直接调用naocs 来操作下线，
+nacos 接口
+
+```bash
+post请求: http://127.0.0.1:8848/nacos/v1/ns/instance?serviceName=服务名次&ip=ip地址&port=端口&enabled=false
+
+enabled:false 操作下线
+```
+
 ```html
 //服务从注册中心下线
 http://127.0.0.1:9210/actuator/service-registry?status=DOWN
@@ -121,3 +131,24 @@ public class AuthFilter implements GlobalFilter {
 }
 
 ```
+
+
+## k8s 优雅下线遇到问题
+
+<https://i4t.com/4424.html>
+
+<https://pingcap.com/zh/blog/tidb-opeartor-webhook>
+
+<https://www.kubernetes.org.cn/7714.html>
+
+<https://kubernetes.io/zh/docs/concepts/workloads/pods/pod-lifecycle/>
+
+
+
+
+![image](https://user-images.githubusercontent.com/7867225/135383823-87644f60-af81-4231-b4d3-59373814070c.png)
+
+k8s 第三步之后你的pod 已经不能访问了,
+所以目前的方案，还是有损的
+
+
