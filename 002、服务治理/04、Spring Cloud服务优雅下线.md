@@ -3,6 +3,8 @@
 # Spring Cloud服务优雅下线
 
 > nacos 也可以参考这种方式
+>
+> k8s 优雅下线的方式需要业务项目来配合提供 nacos 下线接口
 
 写文章的当天; 生产中出现紧急的bug;需要紧急进行处理(他喵的今天是周末好不好), 当然主角不是bug,而是重启服务的时候是白天,被客户感知到了,有2-3分钟左右的时间服务是有问题的,
 客户表示很不爽,因此现在公司让所有项目都接入优雅下线;
@@ -96,9 +98,11 @@ spec:
 ```
 
 ## 注意
+
 由于打开`/actuate`服务上下线也暴露到外网，因此在 Spring cloud gateway 做拦截，不让访问。k8s 通过内网调用应用服务
 
 ```java
+
 @Order(0)
 @Component
 public class AuthFilter implements GlobalFilter {
