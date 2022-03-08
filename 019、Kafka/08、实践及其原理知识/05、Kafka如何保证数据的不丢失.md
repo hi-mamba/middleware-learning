@@ -79,7 +79,8 @@ Broker side (per topic):max.message.bytes- this is the largest size of the messa
 ```
 
 5、 partition leader在未完成副本数follows的备份时就宕机的情况，即使选举出了新的leader但是已经push的数据因为未备份就丢失了！
-kafka是多副本的，当你配置了同步复制之后。多个副本的数据都在PageCache里面，出现多个副本同时挂掉的概率比1个副本挂掉的概率就很小了。（官方推荐是通过副本来保证数据的完整性的）
+kafka是多副本的，当你配置了同步复制之后。多个副本的数据都在PageCache里面，
+出现多个副本同时挂掉的概率比1个副本挂掉的概率就很小了。（官方推荐是通过副本来保证数据的完整性的）
 
 6、 kafka的数据一开始就是存储在PageCache上的，定期flush到磁盘上的，也就是说，不是每个消息都被存储在磁盘了，
 如果出现断电或者机器故障等，PageCache上的数据就丢失了。

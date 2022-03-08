@@ -11,7 +11,8 @@
 这个集群存在选举的机制。 因为如果自己不具备选举功能，角色的命名可能就是master/slave了.
 
 ## 选举算法 ：
-　　Nacos集群采用 raft 算法来实现，它是相对zookeeper的选举算法较为简单的一种。选举算法的核心在 RaftCore 中，包括数据的处理和数据同步。
+　　Nacos集群采用 raft 算法来实现，它是相对zookeeper的选举算法较为简单的一种。
+  选举算法的核心在 RaftCore 中，包括数据的处理和数据同步。
 
 　　raft 算法演示地址 ：<http://thesecretlivesofdata.com/raft/>
 
