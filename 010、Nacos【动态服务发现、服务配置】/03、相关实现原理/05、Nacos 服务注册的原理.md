@@ -27,6 +27,8 @@ NamingProxy.reqAPI()–> NamingProxy.callServer()–> HttpClient.request();
 
 这里里面需要涉及到spring的`事件发布`与`订阅`、springcloud当中对服务注册流程所制定的`标准`，
 
+<img width="777" alt="image" src="https://user-images.githubusercontent.com/7867225/158170657-d93249e2-4304-4c86-a2ac-da0fc34b6137.png">
+
 ... 其他步骤省略
 
 `AbstractAutoServiceRegistration`经过一系列的跳转调用最终调用到ServiceRegistry中的register方法。
