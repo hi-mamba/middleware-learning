@@ -61,6 +61,6 @@ Leader ：replica 中的一个角色， producer 和 consumer 只跟 leader 交�
 Follower ：replica 中的一个角色，从 leader 中复制数据。
 
 ## Controller
-Controller：Kafka集群中的其中一个Broker会被选举为Controller，主要负责Partition管理和副本状态管理，
+Controller：Kafka集群中的其中一个Broker会被选举为Controller，主要负责`Partition管理`和`副本状态管理`，
 也会执行类似于重分配Partition之类的管理任务。如果当前的Controller失败，会从其他正常的Broker中重新选举Controller。
 

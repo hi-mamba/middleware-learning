@@ -25,7 +25,7 @@
 ## Kafka 弄丢了消息
 1. 创建topic时，设置副本数>1(建议使用3副本)
 2. 禁用`unclean leader`参与主副本选举，可设置参数 unclean.leader.election.enable=false
-3. 设置ISR最小数量 > 1(min.insync.replicas 表示ISR集合中的最少副本数)
+3. 设置ISR最小数量 > 1(min.insync.replicas 表示ISR集合中的`最少副本数`)
 > 推荐设置成 replication.factor(副本) = min.insync.replicas + 1。
 
 Kafka 为分区（Partition）引入了多副本（Replica）机制，

@@ -7,7 +7,7 @@
 
 ## 1. ZAB协议
 ZAB协议（Zookeeper Atomic Broadcast Protocol）是Zookeeper系统专门设计的一种`支持崩溃恢复的原子广播协议`。
-在 ZooKeeper 中`，主要依赖 ZAB 协议来实现分布式数据一致性`，
+在 ZooKeeper 中，主要依赖 ZAB 协议来`实现分布式数据一致性`，
 基于该协议，ZooKeeper 实现了一种`主备模式的系统架构来保持集群中各个副本之间的数据一致性`。
 
 ZAB协议理论与Zookeeper对该协议的实现还是存在一些差别，本文将针对ZAB的协议本身和Zookeeper的实现两个维度来介绍。
@@ -29,7 +29,7 @@ ZAB协议理论与Zookeeper对该协议的实现还是存在一些差别，本�
 - lastZxid：history中最近接收到的提议的zxid
 
 #### a. 选举阶段
-在选举阶段，`只要有节点在集群中超过半数的节点支持，该节点就会被作为准Leader`。
+在选举阶段，只要有节点在集群中`超过半数`的节点支持，该节点就会`被作为准Leader`。
 该节点暂不会作为Leader节点来提供服务，能否真正作为Leader节点，还依赖与后续的阶段能否正常完成。
 
 #### b. 发现阶段

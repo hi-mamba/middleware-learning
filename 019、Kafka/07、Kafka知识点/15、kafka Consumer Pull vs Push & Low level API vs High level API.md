@@ -4,9 +4,9 @@
 
 ## 一、kafka Pull vs. Push
 
-- Producer： Producer通过主动Push的方式将消息发布到Broker
+- Producer： Producer通过`主动Push`的方式将消息发布到Broker
 
-- Consumer通过Pull从Broker消费数据
+- Consumer通过`Pull`从Broker消费数据
 
 ### Push 
 - 优势：延时低，对于任何一条数据，只要broker收到了，它都可以通过push的方式将数据及时的push给consumer 
@@ -17,7 +17,7 @@
 ### Pull 
 - 优势： Consumer按实际处理能力获取相应量的数据（应对峰值流量，削锋）;Broker实现简单 
 
-- 劣势： 如果处理不好,实时性相对不足(Kafka使用long polling)
+- 劣势： 如果处理不好,实时性相对不足(Kafka使用`long polling`)
 
 ## 二、Low-level API 与 High-level API
 

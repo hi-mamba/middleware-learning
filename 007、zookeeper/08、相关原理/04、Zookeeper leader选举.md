@@ -11,7 +11,8 @@ Zookeeper中Leader的选举采用了三种算法(选择策略)：
 
 - LeaderElection - 是Fast Paxos最简单的一种实现
 - FastLeaderElection（默认） - 标准的Fast Paxos的实现
-- AuthFastLeaderElection - 算法同FastLeaderElection算法基本一致，只是在消息中加入了认证信息，该算法在最新的Zookeeper中也建议弃用
+- AuthFastLeaderElection - 算法同FastLeaderElection算法基本一致，
+  只是在消息中加入了认证信息，该算法在最新的Zookeeper中也建议弃用
 
 Leader选举是保证分布式数据一致性的关键所在。当Zookeeper集群中的一台服务器出现以下两种情况之一时，需要进入Leader选举。
 
@@ -270,4 +271,3 @@ recvset用于记录当前服务器在本轮次的Leader选举中收到的所有�
    我们来比较一下，在CAP理论中，`zk更看重C和P`，即`一致性和分区容错性`。但Eureka更在意的是A和P，A为高可用。
 zk中有master和follower区别，当`进入选举模式时，就无法正常对外提供服务`。
 但Eureka中，集群是对等的，地位是相同的，虽不能保证一致性，但至少可以提供注册服务。 根据不同的业务场景，各有取舍吧。
-  

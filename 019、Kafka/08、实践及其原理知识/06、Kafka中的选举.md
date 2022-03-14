@@ -41,7 +41,7 @@ Kafka 集群controller的选举过程如下
 
 Kafka partition leader的选举过程如下 (由controller执行)：
 
-- 从Zookeeper中读取当前分区的所有ISR(in-sync replicas)集合
+- 从Zookeeper中读取当前分区的所有`ISR`(in-sync replicas 副本)集合 
 
 - 调用配置的分区选择算法选择分区的leader
 
@@ -60,4 +60,3 @@ Kafka partition leader的选举过程如下 (由controller执行)：
  
 - ZooKeeper负载过重 : 每个Replica都要为此在ZooKeeper上注册一个Watch，
 当集群规模增加到几千个Partition时ZooKeeper负载会过重
- 

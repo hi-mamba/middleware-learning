@@ -30,13 +30,13 @@ broker offset 大致分为：base offset、high watemark（HW）、log end offse
 
 base offset：起始位移，replica中第一天消息的offset
 
-HW：replica高水印值，`副本中最新一条已提交消息`的**位移**。
-leader 的HW值也就是实际已提交消息的范围，每个replica都有HW值，但仅仅leader中的HW才能作为标示信息。
+HW：replica 高水印值，`副本中最新一条已提交消息`的**位移**。
+leader 的HW值也就是实际已提交消息的范围，每个replica都有HW值，但`仅仅leader`中的HW才能`作为标示信息`。
 什么意思呢，就是说当按照参数标准成功完成消息备份（成功同步给follower replica后）才会更新HW的值，
 代表消息理论上已经不会丢失，可以认为“已提交”。
 
 LEO：`日志末端位移`，也就是replica中下一条待写入消息的offset，
-注意哈，是下一条并且是待写入的，并不是最后一条。这个LEO个人感觉也就是用来标示follower的同步进度的。
+注意哈，是`下一条并且是待写入`的，并不是最后一条。这个LEO个人感觉也就是用来标示follower的同步进度的。
 
 现在就来看一下之前，broker从收到消息到返回响应这个黑盒子里发生了什么。
 
@@ -98,7 +98,6 @@ follower 相对于leader 落后当超过这个数量的时候就判定该 follow
 
 
 
- 
  
  
  

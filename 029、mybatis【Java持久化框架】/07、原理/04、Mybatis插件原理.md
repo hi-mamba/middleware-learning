@@ -3,6 +3,8 @@
 
 <https://zhuanlan.zhihu.com/p/163863114#:~:text=%E6%80%BB%E7%BB%93%EF%BC%9A%E6%8F%92%E4%BB%B6%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%8E%9F%E7%90%86,%E5%88%B0%E6%8B%A6%E6%88%AA%E5%99%A8%E9%93%BE%E9%87%8C%E9%9D%A2%E3%80%82>
 
+推荐这篇文章：[Mybatis Plugin 插件（拦截器）原理分析](https://www.jianshu.com/p/b82d0a95b2f3)
+
 # Mybatis插件原理
 
 
