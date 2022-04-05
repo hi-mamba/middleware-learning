@@ -3,7 +3,7 @@
 
 # RocketMQ高可用原理
 
-##Leader Broker选举
+## Leader Broker选举
 
 DLedger机制基于Raft协议来进行多台机器的Leader Broker选举,
 刚开始Broker0投票给自己，如果票数一样那么第一轮选举是失败，

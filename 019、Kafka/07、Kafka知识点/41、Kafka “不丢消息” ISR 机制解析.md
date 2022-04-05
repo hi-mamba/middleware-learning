@@ -17,9 +17,11 @@ Kafka 交付语义`、producer中都提到了消息提交给broker中，基本�
 按照常识，要想保证高可用保证不丢失，最直观的就是制造冗余，多做备份，数据互备嘛，Kafka 也是这么去做的。
 
 在Kafka 中`备份日志文件`被称为 replica，   
-replica 又分为leader replica 和follower replica，   
-而`follower replica存在的唯一目的就是防止消息丢失`，并不参与具体的业务逻辑的交互。   
-只有leader 才参与服务，follower的作用就是充当leader的候补，平时的操作也只有信息同步。   
+replica 又分为`leader replica` 和`follower replica`，   
+而`follower replica存在的唯一目的就是防止消息丢失`，并`不参与`具体的业务逻辑的交互。   
+只有leader 才参与服务
+
+follower的作用就是充当leader的`候补`，平时的操作也只有信息同步。   
 ISR （in-sync replica）也就是这组与leader保持同步的replica集合，我们要保证不丢消息，
 首先要`保证ISR的存活（至少有一个备份存活），并且消息提交成功`。   
 那存活的概念是什么呢，就是说`不仅需要机器正常，还需要跟上leader的消息进度`，当达到一定程度的时候就会认为“非存活”状态。
