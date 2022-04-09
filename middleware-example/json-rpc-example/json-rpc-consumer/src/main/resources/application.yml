@@ -1,0 +1,8 @@
+
+
+rpc:
+  client:
+    url: http://localhost:8080/         #1
+    basePackage: space.mamba                #2
+server:
+  port: 8081

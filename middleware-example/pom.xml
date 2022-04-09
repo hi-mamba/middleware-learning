@@ -20,6 +20,7 @@
         <module>canal-kafka-es-example</module>
         <module>spring-cloud-stream-kafka-example</module>
         <module>mini-middleware-example</module>
+        <module>json-rpc-example</module>
     </modules>
 
     <properties>
