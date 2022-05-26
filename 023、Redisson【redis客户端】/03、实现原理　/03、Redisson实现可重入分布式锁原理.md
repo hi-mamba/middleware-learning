@@ -5,6 +5,8 @@
 
 <https://www.mistray.site/2020/02/28/Redisson%E9%94%81%E7%BB%AD%E7%BA%A6%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/>
 
+<https://www.cnblogs.com/cjsblog/p/9831423.html>
+
 # Redisson实现可重入分布式锁原理
 
 ## 主流的分布式锁一般有三种实现方式:
@@ -18,7 +20,7 @@
 redisson具体的执行加锁逻辑都是通过`lua脚本`来完成的，lua脚本能够保证原子性.
 
 > 使用 Redssion 做分布式锁，不需要明确指定 value ，
-> 框架会帮我们生成一个由 UUID 和 加锁操作的线程的 threadId 用冒号拼接起来的字符串
+> 框架会帮我们生成一个由` UUID `和 加锁操作的线程的 ` threadId` 用冒号`拼接`起来的字符串
 
 ## Redisson 可重入原理
 > 实现 热额
@@ -39,6 +41,17 @@ hset设置的value+1 变成了2，然后继续设置过期时间。
 同理，一个线程重入后，解锁时value - 1
 
 > 和 Java 的可重入锁 ReentrantLock 一样，
+
+<https://www.cnblogs.com/cjsblog/p/9831423.html>
+
+　1、判断有没有一个叫“abc”的key
+
+　　2、如果没有，则在其下设置一个字段为“6f0829ed-bfd3-4e6f-bba3-6f3d66cd176c:Thread-1”，值为“1”的键值对 ，并设置它的过期时间
+
+　　3、如果存在，则进一步判断“6f0829ed-bfd3-4e6f-bba3-6f3d66cd176c:Thread-1”是否存在，若存在，则其值加1，并重新设置过期时间
+
+　　4、返回“abc”的生存时间（毫秒）
+  
 
 ## Redisson watchDog原理
 > 默认情况下，看门狗的`默认加锁 30秒`，`每10秒钟`检查一次，也可以通过修改Config.lockWatchdogTimeout来另行指定。
