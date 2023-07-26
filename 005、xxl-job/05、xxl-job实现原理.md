@@ -2,6 +2,10 @@
 # xxl-job实现原理
 
 
+## 定时任务逻辑和时间轮的算法的应用
+![image](https://github.com/hi-mamba/middleware-learning/assets/7867225/4f806ab4-9a49-47f5-928a-ef81958c2835)
+
+
 ## 比如xxl-job，我在执行下次任务之前，如何知道之前的任务执行到什么位置了？
 
 <https://blog.xueqimiao.com/xxl-job/958b10/#%E9%85%8D%E7%BD%AE%E5%B1%9E%E6%80%A7%E8%AF%A6%E7%BB%86%E8%AF%B4%E6%98%8E>
