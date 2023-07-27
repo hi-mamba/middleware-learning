@@ -6,6 +6,9 @@
 
 ## [xxl-job中的时间轮算法](99、中间件场景算法/001、时间轮.md)
 
+
+![image](https://github.com/hi-mamba/middleware-learning/assets/7867225/3f14217e-28e2-47e6-85ca-0b65555134d7)
+
 可以看到xxl-job中的时间轮算法也是比较有特点的，每次轮询，它的生产数据端`scheduleThread去数据库中读取未来5s`内的任务列表，
 然后把它映射到对应的`时间轮`中，供后续的`ringThread去消费`。这个未来5s内应该是xxl-job开发者是有自己的考量，最终定的一个值。
 
