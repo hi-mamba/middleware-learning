@@ -16,6 +16,10 @@ xxl-job的这个时间轮算法最终是可以支持任意的定时时间。
 > 时间轮算法可以说是时间定时任务的最佳解决方案了，它也是在很多开源项目中有应用，
 > 比如 `Netty`、`Akka`、`Quartz`、`ZooKeeper`、`Kafka` 等组件中都存在时间轮的踪影
 
+## 定时任务逻辑和时间轮的算法的应用
+![image](https://github.com/hi-mamba/middleware-learning/assets/7867225/4f806ab4-9a49-47f5-928a-ef81958c2835)
+
+
 ## 比如xxl-job，我在执行下次任务之前，如何知道之前的任务执行到什么位置了？
 
 <https://blog.xueqimiao.com/xxl-job/958b10/#%E9%85%8D%E7%BD%AE%E5%B1%9E%E6%80%A7%E8%AF%A6%E7%BB%86%E8%AF%B4%E6%98%8E>
