@@ -1,5 +1,6 @@
 
-原文：<https://zhuanlan.zhihu.com/p/435419514>
+
+[官方文档](https://www.xuxueli.com/xxl-job/#%E4%BA%94%E3%80%81%E6%80%BB%E4%BD%93%E8%AE%BE%E8%AE%A1)
 
 # XxlJob架构
 
@@ -35,7 +36,30 @@ xxl-job-executor-samples是执行器案例，有两个执行器案例
 - xxl-job-executor-sample-frameless是普通的版本，直接通过main方法启动。
 
 
+### 调度中心HA（集群）
+基于数据库的集群方案，数据库选用Mysql；集群分布式并发环境中进行定时任务调度时，
+会在`各个节点会上报任务`，存到数据库中，执行时会从数据库中取出触发器来执行，
+如果触发器的名称和执行时间相同，则只有一个节点去执行此任务
+
 ## xxl-job 实现
+
+
+
+### xxl-job-admin服务启动原理
+
+<https://www.zhihu.com/column/c_1442233921593761792>
+
+### xxl-job任务调度核心流程
+
+<https://www.zhengw-tech.com/2022/04/30/xxl-job/>
+
+### xxl-job任务执行流程 
+
+<https://juejin.cn/post/6938034809197297694>
+
+
+
+
 
 ### 1、`调度中心`启动
  启动xxl-job-admin
@@ -52,10 +76,12 @@ start方法会创建并启动`scheduleThread`和`ringThread`两个线程
 
 [xxl-job定时任务触发实现分析](https://zhuanlan.zhihu.com/p/436447196)
 
+原文：<https://zhuanlan.zhihu.com/p/435419514>
 
 ### 3、xxl-job定时任务执行流程-客户端触发
 
 ### 4、xxl-job定时任务执行流程-服务器触发
 
-
 ### 5、xxl-job定时任务执行流程-任务执行
+
+
