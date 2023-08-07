@@ -13,6 +13,6 @@
 
 
 
-## xxl-job客户端执行器注册流程大致如下图
+## [xxl-job客户端执行器注册流程大致如下图](https://juejin.cn/post/6937669199942647845)
 
 ![image](https://github.com/hi-mamba/middleware-learning/assets/7867225/6ebc6c7e-d79f-4d93-9bc5-4d2f3f1a6b2c)
