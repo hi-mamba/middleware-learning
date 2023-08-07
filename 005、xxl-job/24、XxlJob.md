@@ -10,3 +10,9 @@
 调度中心怎么调用执行器？
 集群调度时如何控制一个任务在该时刻不会重复执行
 集群部署应该注意什么？
+
+
+
+## xxl-job客户端执行器注册流程大致如下图
+
+![image](https://github.com/hi-mamba/middleware-learning/assets/7867225/6ebc6c7e-d79f-4d93-9bc5-4d2f3f1a6b2c)
