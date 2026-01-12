@@ -35,7 +35,7 @@
         <apache.common.collection4.version>4.4</apache.common.collection4.version>
         <apache.httpclient.verison>4.5.13</apache.httpclient.verison>
         <apache.commons-httpclient.verison>3.1</apache.commons-httpclient.verison>
-        <guava.version>30.1.1-jre</guava.version>
+        <guava.version>32.0.0-jre</guava.version>
         <jackson.version>2.12.3</jackson.version>
         <common-example.version>1.0.0</common-example.version>
         <zookeeper-common.version>1.0.0</zookeeper-common.version>
